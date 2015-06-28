@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+{% block content %}
+<div class="posts">
+  <section class="post">
+    <div class="post-description">
+      <p>
+        {{ post|custom_markdown }}
+      </p>
+    </div>
+  </section>
+</div><!-- /.blog-post -->
+{% endblock %}
