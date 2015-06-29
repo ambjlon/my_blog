@@ -17,5 +17,5 @@ urlpatterns = patterns('',
     url(r'^$', 'article.views.home'),
     url(r'^test/','article.views.test'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
-    url(r'^aboutme/$', 'article.views.about_me', name = 'about_me'),
+    url(r'^aboutme/', 'article.views.about_me', name = 'about_me'),
 )
