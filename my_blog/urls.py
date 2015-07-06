@@ -18,4 +18,7 @@ urlpatterns = patterns('',
     url(r'^test/','article.views.test'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
     url(r'^aboutme/', 'article.views.about_me', name = 'about_me'),
+    url(r'^tagscloud/', 'article.views.tags_cloud', name = 'tags_cloud'),
+    url(r'^tag=(?P<tag>[\w-]+)/$', 'article.views.cast_tag', name='cast_tag'),
+    url(r'^category=(?P<category>[\w-]+)/$', 'article.views.cast_category', name='cast_category'),
 )
