@@ -63,9 +63,7 @@ def cast_category(request, category):
         return_post_list = []
         post_list = Article.objects.all()
         for post in post_list:
-                print category
-                print post.category
-                if not category == post.category:
+                if not category in post.category:
                         continue
                 post_info = util.PostInfo()
                 post_info.id = post.id
