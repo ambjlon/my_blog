@@ -62,7 +62,7 @@ http://www.emacswiki.org/emacs/NeoTree_%E4%B8%AD%E6%96%87wiki
 # 2015/3/25 添加Undotree  
 这次添加undotree使用的elap包管理器，并没有手动向init.el添加相应的引用语句。下次安装别的包继续观察是否还是不用添加。
 
-+ 碰到的问题：选择了tree上的某个节点后，按下ret想达到这个状态，提示：“Buffer is read-only: #<buffer  *undo-tree*>”。
++ 碰到的问题：选择了tree上的某个节点后，按下ret想达到这个状态，提示：“Buffer is read-only: buffer  *undo-tree* ”。
 + 解决方法：首先不需要按下ret，选择了某个节点，默默的关了undotree窗口就好了。再次，按C-x C-q会提示Read-Only mode disabled。
 # 2015/4/5  
 1. 修复window-xhsell下Alt键不能当Meta使用的问题。xhsell的文件->属性->终端->键盘->元键仿真可以更改这个设置。
@@ -84,15 +84,19 @@ http://www.emacswiki.org/emacs/NeoTree_%E4%B8%AD%E6%96%87wiki
         (require 'auto-complete-config)
         (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150322.813/dict")
         (ac-config-default)
-就能够通过auto-complete调用yasnippet，不需要在auto-complete中添加yasnippet资源。不通过auto-complete调用yasnippet，通过tab键也能补齐snippet。
+就能够通过auto-complete调用yasnippet，不需要在auto-complete中添加yasnippet资源。不通过auto-complete调用yasnippet，通过tab键也能补齐snippet。   
+
 # 2015/4/6
 + 对备份文件（以波浪线为后缀的文件）统一到一个目录下管理：(setq backup-directory-alist (quote (("." . "~/.backups"))))
 + 临时文件（被警号包围的文件）在异常退出时产生，编辑时产生的临时文件在Emacs正常退出时会自动删除的。临时文件很有必要存在，编辑时不断的自动保存，异常退出时还有可以恢复用的临时文件！
+
 # 2015/4/7
 emacs 输入转义字符。C-q C-g 输入^G    C-q C-a输入^A
+
 # 2015/4/8
 通过emacs-eclim使用eclipse的时候，在eclim-project-import一个maven project的时候，得保证目录下有.project文件，这个文件是eclipse使用的。  
 不存在会提示目录下没有project可以导入。这是在目录下运行mvn eclipse:eclipse，会在这个目录下建立eclipse可以使用的.project。
+
 # 2015/6/8
 Emacs调用eclipse实现智能补全是一个非常重要的功能，之前的配置略有不详之处，今天再把这个功能的配置详述一下，以备不时之需。前面的描述就删掉了。  
 配置emacs+eclim+eclipse+emacs-eclim. 这些配置可以解决在emacs下使用java的智能提示，尽可能多的实现图形界面的eclipse的功能，也就是可以使用一系列eclipse拥有的java开发功能。eclim是专门为vim写的一个使用eclipse特征的服务，它接受一些commands，把这些commands发送给eclipse进行执行，这样我们就可以在vim中使用这些Java开发特征了。emacs下也可以享受到这些开发功能，我们通过emacs-eclim这个插件来操控eclim，这样eclim+emacs-eclim就一起充当了emacs到eclipse的桥梁。  
