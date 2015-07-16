@@ -1,0 +1,1 @@
+emacs 使用helm-projectile-grep在目录下递归查找含有正则匹配模式串的文件. helm-do-grep也是同样地功能. 但是自从开始使用helm就发现helm-do-grep可以正常使用, helm-projectile-grep就会报错"Error running timer `helm-projectile-grep-or-ack': (wrong-type-argument stringp nil)", 这个问题一直没解决, 后来在别的机器上使用这个命令却没有这个错误, 开始怀疑是grep的版本的问题. 于是试着升级一下grep的版本, 安装完了也没见grep的版本变高, 但是helm-projectile-grep 却正常了, 目测就是和grep的版本有关, 暂时没时间看细节了.
