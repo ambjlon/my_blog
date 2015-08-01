@@ -2,7 +2,7 @@
 #sudo python insert_txtblog_2_mysql.py '2013.3.31百度之星，线性同余发生器 求序列周期（2）---给出一个正解'  '算法' '百度之星 同余 伪随机数' baiduzhixing_solution.md
 #sudo python insert_txtblog_2_mysql.py '搭建自由域名的个人博客'  '工程技术' '个人博客 云服务器' buy_server.md 
 #sudo python insert_txtblog_2_mysql.py '允许访问文件网址 chrome插件markdown preview plus'  '工程技术' 'chrome插件 markdown'  chrome_markdown_preview_plus.md 
-sudo python insert_txtblog_2_mysql.py '我的emacs配置备忘录'  '工程技术'  'emacs' emacs.md 
+#sudo python insert_txtblog_2_mysql.py '我的emacs配置备忘录'  '工程技术'  'emacs' emacs.md 
 #sudo python insert_txtblog_2_mysql.py '安装 django mysql python 简单配置'  '工程技术' '配置 django mysql Python' install_django_mysql_python.md 
 #sudo python insert_txtblog_2_mysql.py 'Java正则匹配数字和字母以及空格的组合'  '工程技术' '正则表达式' java_regular_az09_combine.md 
 #sudo python insert_txtblog_2_mysql.py 'LDA学习笔记（1）'  '算法' 'LDA 主体模型' LDA1.md 
@@ -23,3 +23,9 @@ sudo python insert_txtblog_2_mysql.py '我的emacs配置备忘录'  '工程技�
 #sudo python insert_txtblog_2_mysql.py 'Z shell（zsh）安装-更新-配置-使用'  '工程技术' 'Zshell shell linux' zshell.md 
 #sudo python insert_txtblog_2_mysql.py  'mac os x使用emacs' '工程技术' 'emacs homebrew mac'  macosx_using_emacs.md
 #sudo python insert_txtblog_2_mysql.py 'os x 类unix系统的终端颜色配置-极致的视觉体验' '工程技术' 'mac iTerm 终端配色' macos_shell_color.md
+#sudo python insert_txtblog_2_mysql.py 'linux 多版本python的默认调用' '工程技术' 'linux python' python_multi_version.md
+#sudo python insert_txtblog_2_mysql.py 'xshell登录linux使用emacs backspace C-h 键触发帮助功能' '工程技术' 'xshell emacs linux mac' emacs_xshell_backspace_help.md
+#sudo python insert_txtblog_2_mysql.py 'emacs配置python的智能提示开发环境jedi' '工程技术' 'emacs python' emacs_jedi.md
+#sudo python insert_txtblog_2_mysql.py 'emacs helm-projectile-grep问题修复' '工程技术' 'emacs'  helm_projectile_grep.md
+#sudo python insert_txtblog_2_mysql.py 'mapreduce 二次排序 释惑' '工程技术' 'hadoop mapreduce' mapreduce_shuffle_secondary_2_problems.md
+sudo python insert_txtblog_2_mysql.py '科普 图像处理 像素固定不变调整大小' '生活' 'python 图像处理' adjust_pix_for_lixiaoyan_yuting.md
