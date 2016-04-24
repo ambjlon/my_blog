@@ -28,4 +28,5 @@
 #sudo python insert_txtblog_2_mysql.py 'emacs配置python的智能提示开发环境jedi' '工程技术' 'emacs python' emacs_jedi.md
 #sudo python insert_txtblog_2_mysql.py 'emacs helm-projectile-grep问题修复' '工程技术' 'emacs'  helm_projectile_grep.md
 #sudo python insert_txtblog_2_mysql.py 'mapreduce 二次排序 释惑' '工程技术' 'hadoop mapreduce' mapreduce_shuffle_secondary_2_problems.md
-sudo python insert_txtblog_2_mysql.py '科普 图像处理 像素固定不变调整大小' '生活' 'python 图像处理' adjust_pix_for_lixiaoyan_yuting.md
+#sudo python insert_txtblog_2_mysql.py '科普 图像处理 像素固定不变调整大小' '生活' 'python 图像处理' adjust_pix_for_lixiaoyan_yuting.md
+sudo python insert_txtblog_2_mysql.py '无线路由器桥接 实现网络环境无死角' '工程技术' '桥接' bridge_router_longxing.md
