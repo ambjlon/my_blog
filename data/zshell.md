@@ -24,7 +24,7 @@ zsh在一般的linux发行版本中都默认包含了。看一下你的机器上
     + 下载&解压：
 
             :::shell
-            wget http://sourceforge.net/projects/zsh/files/zsh/5.0.2/zsh-5.0.2.tar.bz2/download
+            wget http://sourceforge.net/projects/zsh/files/zsh/5.0.2/zsh-5.0.2.tar.bz2
             tar xvjf zsh-5.0.2.tar.bz2
             cd zsh-5.0.2
 
@@ -59,6 +59,7 @@ ll /bin/可以看到   zsh -> /usr/local/bin/zsh* 链接成功。
 现在再输入zsh，新版本被调用了。目前只有通过这么龌龊的办法搞定了。。。。。
 
 4. 使用oh my zsh  
+    (在安装oh my zsh之前需要手动向/etc/shells文件加入/usr/local/bin/zsh, 否则oh my zsh提示找不到zsh!!)
 　　oh my zsh 是对zsh的配置进行管理的包。里面有各种背景、主题等等。这个安装还是比较顺利的。
 
         ::shell
