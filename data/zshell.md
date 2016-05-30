@@ -41,7 +41,7 @@ zsh在一般的linux发行版本中都默认包含了。看一下你的机器上
             :::shell
             /usr/local/bin/zsh --version
             zsh 5.0.2 (x86_64-unknown-linux-gnu)
-此时再输入cat /etc/shells就会输出1中的那些了，注意在安装新版本之前执行cat /etc/shells是没有输出中的最后一行的！
+此时再输入cat /etc/shells就会输出1中的那些了(还需要自己编辑/etc/shells文件, 手动加入usr/local/bin/zsh)，注意在安装新版本之前执行cat /etc/shells是没有输出中的最后一行的！
 
 3. 配置  
 　　蛋疼的问题来了，我们在命令行输入zsh还是原来的老版本zsh被调用，注意此时老版本在/bin/zsh,新版本在/usr/local/bin/zsh。我想要的状态是我输入zsh命令是新版本的zsh被调用，当然你可以输入/usr/local/bin/zsh,这样很不人性~~本以为是修改环境变量可以解决这个问题，各种修改~/.bashrc ./bash_profile，还是没能达成目的。参考了一篇修改Python版本的类似的问题。做了下面的操作：
@@ -71,4 +71,4 @@ ok!!
         :::shell
         /etc/profile.d/tops_bashrc.sh:20: command not found: complete
         /etc/profile.d/tops_bashrc.sh:31: command not found: shopt
-还没仔细研究这是怎么回事，不过貌似不妨碍zsh的使用。接下来，好好把玩儿一下zsh，已经oh my zsh。
+还没仔细研究这是怎么回事，不过貌似不妨碍zsh的使用。接下来，好好把玩儿一下zsh，以及oh my zsh。
