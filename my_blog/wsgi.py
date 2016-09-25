@@ -15,9 +15,9 @@ framework.
 """
 import os
 import sys
-sys.path.append('/root')
-sys.path.append('/root/my_blog')
-sys.path.append('/root/my_blog/article')
+sys.path.append('/home/wgc')
+sys.path.append('/home/wgc/my_blog')
+sys.path.append('/home/wgc/my_blog/article')
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use
 # mod_wsgi daemon mode with each site in its own daemon process, or use
