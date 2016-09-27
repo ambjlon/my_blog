@@ -1,5 +1,5 @@
-python insert_txtblog_2_mysql.py '2013.3.31百度之星，线性同余发生器 求序列周期（1）'  '算法' '同余 伪随机数' baiduzhixing.md '2012-06-21 11:03:32'
-python insert_txtblog_2_mysql.py '2013.3.31百度之星，线性同余发生器 求序列周期（2）---给出一个正解'  '算法' '同余 伪随机数' baiduzhixing_solution.md '2012-06-24 10:13:34'
+python insert_txtblog_2_mysql.py '2013.3.31百度之星，线性同余发生器 求序列周期（1）'  '算法' '同余' baiduzhixing.md '2012-06-21 11:03:32'
+python insert_txtblog_2_mysql.py '2013.3.31百度之星，线性同余发生器 求序列周期（2）---给出一个正解'  '算法' '同余' baiduzhixing_solution.md '2012-06-24 10:13:34'
 python insert_txtblog_2_mysql.py '搭建自由域名的个人博客'  '工程技术' '云服务器' buy_server.md '2015-04-28 15:29:10'
 python insert_txtblog_2_mysql.py '允许访问文件网址 chrome插件markdown preview plus'  '工程技术' 'markdown'  chrome_markdown_preview_plus.md '2015-05-03 11:21:39'
 python insert_txtblog_2_mysql.py '我的emacs配置备忘录'  '工程技术'  'emacs' emacs.md '2014-11-04 18:03:38'
