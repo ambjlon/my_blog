@@ -16,7 +16,7 @@
 #sudo python insert_txtblog_2_mysql.py '寻找空间点集中与指定点距离最近的点-由一道面试题目想到的'  '算法' '面试题' mianshiti_kd_distance.md 
 #sudo python insert_txtblog_2_mysql.py '编程之美--寻找符合条件的整数，符合条件整数存在的证明'  '算法' '编程之美 面试题' program_beauty_integer.md 
 #sudo python insert_txtblog_2_mysql.py '编程之美--小飞的电梯调度算法的一点论证'  '算法' '编程之美 电梯调度' program_beauty_xiaofen_dianti.md 
-python insert_txtblog_2_mysql.py '自动扫雷 分析'  '算法' '扫雷' saolei_any.md '2013-08-17 17:23:45'
+python insert_txtblog_2_mysql.py '自动扫雷分析'  '算法' '面试题' saolei_any.md '2013-08-17 17:23:45'
 #sudo python insert_txtblog_2_mysql.py '对后缀数组构造算法--DC3的一点解释'  '算法' '面试题 后缀数组'  suffix_dc3.md 
 #sudo python insert_txtblog_2_mysql.py '树状数组的原理解释'  '算法' '树状数组 面试题' tree_array.md
 #sudo python insert_txtblog_2_mysql.py '我是运维'  '工程技术' 'linux shell' woshi_pe.md 
