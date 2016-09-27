@@ -29,4 +29,4 @@ python insert_txtblog_2_mysql.py 'emacs配置python的智能提示开发环境je
 python insert_txtblog_2_mysql.py 'emacs helm-projectile-grep问题修复' '工程技术' 'emacs'  helm_projectile_grep.md '2015-06-28 12:31:52'
 python insert_txtblog_2_mysql.py 'mapreduce二次排序释惑' '工程技术' 'mapreduce' mapreduce_shuffle_secondary_2_problems.md '2015-07-21 13:45:41'
 python insert_txtblog_2_mysql.py '科普 图像处理 像素固定不变调整大小' '生活' 'python 图像处理' adjust_pix_for_lixiaoyan_yuting.md '2015-08-23 23:45:28'
-python insert_txtblog_2_mysql.py '无线路由器桥接 实现网络环境无死角' '工程技术' '桥接' bridge_router_longxing.md '2015-10-18 15:38:29'
+python insert_txtblog_2_mysql.py '无线路由器桥接实现网络环境无死角' '工程技术' '路由器' bridge_router_longxing.md '2015-10-18 15:38:29'
