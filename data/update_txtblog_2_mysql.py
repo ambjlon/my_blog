@@ -10,7 +10,7 @@ from django.db.transaction import commit_on_success
 from django.db import connections
 from article.models import Article
 from datetime import *
-def insert_txtblog(blogfile, title, cate, tags, create_time, using="default"):
+def update_txtblog(blogfile, using="default"):
     con  = connections[using] 
     fields = [f for f in Article._meta.fields if not
             isinstance(f, django.db.models.AutoField)]
@@ -23,23 +23,16 @@ def insert_txtblog(blogfile, title, cate, tags, create_time, using="default"):
         fin=open(blogfile, 'r')
         fin.seek(0)
         txt=fin.read()
-        #Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=datetime.strptime(create_time, '%Y-%m-%d %H:%M:%S'));
-        Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=create_time); 
-    finally:
+        Article.objects.filter(file_name=blogfile).update(content=txt)
         fin.close();
         con.close()
 
 def  main(argvs):
-    if len(argvs) < 6:
+    if len(argvs) < 2:
         print "error using"
         exit()
-    title=argvs[1]
-    cate=argvs[2]
-    tags = argvs[3]
-    qic_file = argvs[4]
-    create_time = argvs[5]
-    insert_txtblog(qic_file, title, cate, tags, create_time)
+    qic_file = argvs[1]
+    update_txtblog(qic_file)
 
 if __name__ == "__main__":
     main(sys.argv)
-
