@@ -24,7 +24,7 @@ def update_txtblog(blogfile, using="default"):
         fin.seek(0)
         txt=fin.read()
         Article.objects.filter(file_name=blogfile).update(content=txt)
-        fin.close();
+        fin.close()
         con.close()
 
 def  main(argvs):
