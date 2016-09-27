@@ -24,7 +24,7 @@ def insert_txtblog(blogfile, title, cate, tags, create_time, using="default"):
         fin.seek(0)
         txt=fin.read()
         #Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=datetime.strptime(create_time, '%Y-%m-%d %H:%M:%S'));
-        Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=create_time, file_name=blogfile); 
+        Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=create_time); 
     finally:
         fin.close();
         con.close()
