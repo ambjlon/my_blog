@@ -6,7 +6,7 @@ class Article(models.Model) :
     title = models.CharField(max_length = 200)
     category = models.CharField(max_length = 50, blank = True)
     tag = models.CharField( max_length = 200 )
-    date_time = models.DateTimeField(auto_now_add = True)
+    date_time = models.DateTimeField(auto_now_add = False)
     content = models.TextField(blank = True, null = True)
 
     def get_absolute_url(self):

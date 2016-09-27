@@ -3,13 +3,14 @@
 import os
 import sys
 import django
+from datetime import *
 os.sys.path.append("..")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "my_blog.settings")
 from django.db.transaction import commit_on_success
 from django.db import connections
 from article.models import Article
 from datetime import *
-def insert_txtblog(blogfile, title, cate, tags,using="default"):
+def insert_txtblog(blogfile, title, cate, tags, create_time, using="default"):
     con  = connections[using] 
     fields = [f for f in Article._meta.fields if not
             isinstance(f, django.db.models.AutoField)]
@@ -22,20 +23,22 @@ def insert_txtblog(blogfile, title, cate, tags,using="default"):
         fin=open(blogfile, 'r')
         fin.seek(0)
         txt=fin.read()
-        Article.objects.create(title = title, category = cate, tag = tags, content=txt); 
+        #Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=datetime.strptime(create_time, '%Y-%m-%d %H:%M:%S'));
+        Article.objects.create(title = title, category = cate, tag = tags, content=txt, date_time=create_time); 
     finally:
-        fin.close()
+        fin.close();
         con.close()
 
 def  main(argvs):
-    if len(argvs) < 5:
+    if len(argvs) < 6:
         print "error using"
         exit()
     title=argvs[1]
     cate=argvs[2]
     tags = argvs[3]
     qic_file = argvs[4]
-    insert_txtblog(qic_file,title,cate,tags)
+    create_time = argvs[5]
+    insert_txtblog(qic_file, title, cate, tags, create_time)
 
 if __name__ == "__main__":
     main(sys.argv)
