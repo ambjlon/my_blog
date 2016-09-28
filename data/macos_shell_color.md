@@ -45,13 +45,6 @@ mac os x是源于FreeBSD的类Unix操作系统, 底层的ls grep命令和linux�
 
          此时, 再使用ls, 发现结果变得不错了. 可以编辑~/.dir\_colors的颜色, 调成你自己喜欢的, 比如让.c后缀的文件显示为亮红色. 但是, 我没有编辑它, 继续导入solarized的描述文件吧, 从[github](https://github.com/seebi/dircolors-solarized) clone描述文件, 这些文件和~/.dir\_colors的格式是一样的, 但是搭配更炫一些. 
 
-<!-- # 炫一下 -->
-<!-- 做了这么多工作, 结果是什么样的呢, 截图一下吧   -->
-<!-- 1. iTerm下的   -->
-<!-- ![img](http://media.xtwind.com/images/2015/07/12/e22dd845e0a499f832df5240fbf95f63.png) -->
-<!-- 2. Terminal也能这么美~_~   -->
-<!-- ![img](http://media.xtwind.com/images/2015/07/12/efee43bbbd0a5203192d10066acc81f0.png) -->
-
 # 参考
 1. http://chaishiwei.com/blog/247.html
 2. http://www.mactricksandtips.com/2008/10/customizing-the-mac-terminal-bash-prompt.html
