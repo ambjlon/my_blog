@@ -2,7 +2,7 @@
 在window下用xshell登录linux服务器, 然后使用emacs进行编辑, 发现backspace建总是出发帮助功能, 相当于C-h的作用.
 # 解决办法
 配置window下的xshell, 在连接的 "属性->终端->键盘" 选项下做下图所示的配置:  
-![img](http://i3.tietuku.com/a2782eba758db617.jpg)  
+![img](/static/blog_pic/xshell.jpg)  
 这样设置后不需要在emacs初始化文件做任何配置, 在xshell登录了Linux后正常使用windows键盘下的delete&backspace键. 打开帮助的时候按C-h即可. mac下自然也不受任何影响.
 # 细节探究
 ## 解决方案1
