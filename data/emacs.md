@@ -58,7 +58,7 @@ http://www.emacswiki.org/emacs/NeoTree_%E4%B8%AD%E6%96%87wiki
 
 1. M-x customize-group RET neotree RET
 2. 修改这些配置项就可以了
-![](http://media.xtwind.com/images/2015/06/22/d18dea30ec5560b1c1c763ab6246093a.png)  
+![](/static/blog_pic/emacs_neotree.png)  
 # 2015/3/25 添加Undotree  
 这次添加undotree使用的elap包管理器，并没有手动向init.el添加相应的引用语句。下次安装别的包继续观察是否还是不用添加。
 
