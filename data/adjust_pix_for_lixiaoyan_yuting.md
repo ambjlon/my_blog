@@ -31,11 +31,11 @@ Python的图像处理库有一个save函数, 其中的选项可以添加quantity
 简单地代码及使用方法参考[这里](https://github.com/ambjlon/image_process_fixedpix)
 
 # 效果展示
-![原始图](/bstatic/blog_pic/python_pixel_100.jpg "原始图")
-![8折](/bstatic/blog_pic/python_pixel_80.jpg "80%质量")
-![](/bstatic/blog_pic/python_pixel_40.jpg "40%质量")
-![](/bstatic/blog_pic/python_pixel_20.jpg "20%质量")
-![](/bstatic/blog_pic/python_pixel_5.jpg "5%质量")  
+![原始图](/static/blog_pic/python_pixel_100.jpg "原始图")
+![8折](/static/blog_pic/python_pixel_80.jpg "80%质量")
+![](/static/blog_pic/python_pixel_40.jpg "40%质量")
+![](/static/blog_pic/python_pixel_20.jpg "20%质量")
+![](/static/blog_pic/python_pixel_5.jpg "5%质量")  
 这五张图从左至右从上至下一次是100% 80% 40% 20% 5%质量系数对应的压缩结果. 使用的是Python基本,也就是python的图像处理库. 他们的像素始终没有变化, 但是大小却依次降低. 而且大小不和质量系数成正比.
 
 # 参考
