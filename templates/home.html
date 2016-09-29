@@ -6,12 +6,9 @@
   <section class="post">
     <header class="post-header">
       <h2 class="post-title"><a href="{% url "detail" id=post.id %}"><font size="4">{{ post.title }}</font></a></h2>
-
       <p class="post-meta">
-        Time: {{ post.datetime |date:"/Y /m /d"}}
-
-        <a class="post-category post-category-js" href="{% url "cast_category" category='post.category' %}">{{ post.category }}</a>
-        <!--a href="{% url "cast_category" category='算法' %}">算法</a-->
+        创建时间: {{ post.datetime |date:"Y年m月d日"}}
+        <a class="post-category post-category-js" href="{% url "cast_category" category=post.category %}">{{ post.category }}</a>
         {% for e in post.tag_list %}
         <a class="post-category post-category-yui" href="{% url "cast_tag" tag=e %}">{{ e }}</a>
         {% endfor %}
