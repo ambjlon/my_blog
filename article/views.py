@@ -27,7 +27,8 @@ def detail(request, id):
                 post = Article.objects.get(id=str(id))
         except Article.DoesNotExist:
                 raise Http404
-        return render(request, 'post.html', {'post' : post})
+        tag_list = post.tag.split(' ')
+        return render(request, 'post.html', {'post' : post, 'tag_list' : tag_list})
 def about_me(request):
         return render(request, 'aboutme.html')
 def test(request):
