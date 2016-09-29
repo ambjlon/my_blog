@@ -8,7 +8,7 @@
       <p class="post-meta">
         创建时间: {{ post.date_time | date:"Y年m月d日"}}
         <a class="post-category post-category-js" href="{% url "cast_category" category=post.category %}">{{ post.category }}</a>
-        {% for e in post.tag_list %}
+        {% for e in tag_list %}
         <a class="post-category post-category-yui" href="{% url "cast_tag" tag=e %}">{{ e }}</a>
         {% endfor %}
       </p>
