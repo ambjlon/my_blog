@@ -8,22 +8,24 @@
       <h2 class="post-title"><a href="{% url "detail" id=post.id %}"><font size="4">{{ post.title }}</font></a></h2>
 
       <p class="post-meta">
-        Time:  <a class="post-author" href="#">{{ post.datetime |date:"/Y /m /d"}}</a> <a class="post-category post-category-js" href="#">{{ post.category }}</a>
-        
-     <!-- {% for e in post.tag_list %}
-      <a class="post-category post-category-js" href="{% url "cast_tag" tag=e %}">{{ e }}</a>
-      {% endfor %}        -->
+        Time: {{ post.datetime |date:"/Y /m /d"}}
+
+        <a class="post-category post-category-js" href="{% url "cast_category" category='post.category' %}">{{ post.category }}</a>
+        <!--a href="{% url "cast_category" category='算法' %}">算法</a-->
+        {% for e in post.tag_list %}
+        <a class="post-category post-category-yui" href="{% url "cast_tag" tag=e %}">{{ e }}</a>
+        {% endfor %}
       </p>
       <a class="pure-button" href="{% url "detail" id=post.id %}"><font size="2">Read More... </a>
     </header>
 
-
-    <link rel="stylesheet" href="/static/tags.css">
-    <ul class="tags">
-      {% for e in post.tag_list %}
-      <li><a href="{% url "cast_tag" tag=e %}">{{ e }}</a></li>
-      {% endfor %}
-    </ul>
+    <!-- ticket tags参考https://codepen.io/pankajparashar/pen/BKFpC.  会挤压left-page-->
+    <!--link rel="stylesheet" href="/static/tags.css">
+        <ul class="tags">
+          {% for e in post.tag_list %}
+          <li><a href="{% url "cast_tag" tag=e %}">{{ e }}</a></li>
+          {% endfor %}
+    </ul-->
   </section>
   <hr />
   {% endfor %}
