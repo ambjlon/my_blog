@@ -13,7 +13,31 @@
     
     <link rel="stylesheet" href="/static/pygments-css/zenburn.css">
 
-
+    <!-- 标签云 参考:http://www.goat1000.com/tagcanvas.php
+         tagcanvas example http://www.goat1000.com/tagcanvas-examples.php
+         tagcanvas 响应式设计http://www.goat1000.com/tagcanvas-faq.php#faq4  找对文档了  事情很简单~_~
+         tagcanvas 设置选项
+      -->
+    <script src="/static/jquery.tagcanvas.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+      try {
+      TagCanvas.Start('myCanvas','tags',{
+      textFont: 'Impact,"Arial Black",sans-serif',
+      textHeight: 25,
+      textColour: '#000000',
+      outlineColour: '#ff00ff',
+      reverse: true,
+      depth: 0.8,
+      maxSpeed: 0.05
+      });      
+      } catch(e) {
+      // something went wrong, hide the canvas container
+      document.getElementById('myCanvasContainer').style.display = 'none';
+      }
+      };
+    </script>
+    
     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["tsina","weixin","qzone","douban","sqq","renren","fbook","youdao","qingbiji","twi","print"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"5","bdPos":"right","bdTop":"140"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
     
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -34,25 +58,15 @@
       }
     </style>
   </head>  
-  <!--h2 class="brand-tagline"><font color="green">印象-魏公村</font></h2-->
-  <!--li class="nav-item">
-      <a class="button-success pure-button" href="/">归档</a>
-</li-->
 
   <body>
     <div id="layout" class="pure-g">
       <div id="leftpage" class="sidebar pure-u-1 pure-u-md-1-4">
-        <!--div><p>ppkkkkkkkkkkoooooo</p></div-->
-        <div class="header">
-          <!--p>ppkkkkkkkkkkoooooodlfkgfjgos</p-->
-
+        <div class="header">          
           <h1 class="brand-title"><font size="5">Ambjlon's Blog</font></h1>
           <nav class="nav">
             <li class="nav-item">
               <a class="button-success pure-button" href="/">文章列表</a>
-            </li>
-            <li class="nav-item">
-              <a class="button-success pure-button" href="/tagscloud/">标签云</a>
             </li>
           </nav>
           <p>文章分类</p>
@@ -60,7 +74,19 @@
             <li><a href="{% url "cast_category" category='算法' %}">算法</a></li>
             <li><a href="{% url "cast_category" category='工程技术' %}">工程技术</a></li>
             <li><a href="{% url "cast_category" category='生活' %}">生活随记</a></li>
-          </ul>          
+          </ul>
+          
+          <div id="myCanvasContainer">
+            <canvas width="500" height="500" style="width: 100%" id="myCanvas"></canvas>
+          </div>
+          <div id="tags">
+            <ul>
+              {% for e in tags %}
+              <li><a href="{% url "cast_tag" tag=e %}"> {{ e }} </a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          
         </div>
       </div>
 
@@ -78,6 +104,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
   </body>
 </html>

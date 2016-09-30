@@ -8,6 +8,15 @@ from article import util
 from datetime import *
 import time
 # Create your views here.
+def gettags():
+        post_list = Article.objects.all()
+        tags = set()
+        for e in post_list:
+                words = e.tag.split(' ')
+                for word in words:
+                        tags.add(word)
+        return tags
+        
 def home(request):
         return_post_list = []
         post_list = Article.objects.all()
@@ -20,7 +29,7 @@ def home(request):
                 post_info.datetime = post.date_time
                 post_info.content = post.content
                 return_post_list.append(post_info)
-        return render(request, 'home.html', {'post_list' : return_post_list})
+        return render(request, 'home.html', {'post_list' : return_post_list, 'tags' : gettags()})
 
 def detail(request, id):
         try:
@@ -28,23 +37,16 @@ def detail(request, id):
         except Article.DoesNotExist:
                 raise Http404
         tag_list = post.tag.split(' ')
-        return render(request, 'post.html', {'post' : post, 'tag_list' : tag_list})
+        return render(request, 'post.html', {'post' : post, 'tag_list' : tag_list, 'tags' : gettags()})
 def about_me(request):
-        return render(request, 'aboutme.html')
+        return render(request, 'aboutme.html', {'tags' : gettags()})
 def test(request):
         f = open("/home/jianglong.cjl/my_blog/data/macox_ssh_linux_gnuplot_conf.md","r")
         f.seek(0)
         post = f.read()
         f.close()
-        return render(request, 'test.html', {'post' : post})
-def tags_cloud(request):
-        post_list = Article.objects.all()
-        tags = set()
-        for e in post_list:
-                words = e.tag.split(' ')
-                for word in words:
-                        tags.add(word)
-        return render(request, 'tagscloud.html', {'tag' : tags})
+        return render(request, 'test.html', {'post' : post, 'tags' : gettags()})
+
 def cast_tag(request, tag):
         return_post_list = []
         post_list = Article.objects.all()
@@ -59,7 +61,7 @@ def cast_tag(request, tag):
                 post_info.datetime = post.date_time
                 post_info.content = post.content
                 return_post_list.append(post_info)
-        return render(request, 'tagshome.html', {'post_list' : return_post_list, 'tag':tag} )
+        return render(request, 'tagshome.html', {'post_list' : return_post_list, 'tag':tag, 'tags' : gettags()} )
 def cast_category(request, category):
         return_post_list = []
         post_list = Article.objects.all()
@@ -74,4 +76,4 @@ def cast_category(request, category):
                 post_info.datetime = post.date_time
                 post_info.content = post.content
                 return_post_list.append(post_info)
-        return render(request, 'categoryhome.html', {'post_list' : return_post_list,'category' : category} )
+        return render(request, 'categoryhome.html', {'post_list' : return_post_list,'category' : category, 'tags' : gettags()} )
