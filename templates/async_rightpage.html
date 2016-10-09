@@ -1,0 +1,36 @@
+<div class="content pure-u-1 pure-u-md-3-4" id="rightpage">
+  <div>
+
+    <div class="posts" id="asyncposts">
+      {% for post in post_list %}
+      <section class="post">
+        <header class="post-header">
+          <h2 class="post-title"><a href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
+          <p class="post-meta">
+            创建时间: {{ post.datetime |date:"Y年m月d日"}}
+            <a class="post-category post-category-js clicks" href="/posts?cate={{ post.category }}&page=1">{{ post.category }}</a>
+            {% for e in post.tag_list %}
+            <a class="post-category post-category-yui" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
+            {% endfor %}
+          </p>
+          <a class="pure-button" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
+        </header>
+      </section>
+      <hr />
+      {% endfor %}
+    </div>
+    <link rel="stylesheet" type="text/css" href="/static/pagination.css">
+    <div class="content_detail__pagination cdp" actpage="{{ page }}" id="paging">
+      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:-1 }}" class="cdp_i" id="pre">前一页</a>
+      {% for page_number in Paginator.paginator.page_range  %}
+      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page_number  }}" class="cdp_i" id="num{{ page_number }}">{{ page_number  }}</a>
+      {% endfor %}
+      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:1 }}" class="cdp_i" id="next">下一页</a>
+    </div>
+    <script src="/static/pagination.js" type="text/javascript"></script>
+    
+    <div class="footer">
+      <p align="center"><i class="fa fa-fw fa-user"></i><a href="/aboutme/">About Me</a>&nbsp&nbsp<i class="fa fa-fw fa-github"></i><a href="http://github.com/ambjlon" target="_blank">GitHub</a></p>
+    </div>
+  </div>
+</div>

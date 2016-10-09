@@ -1,3 +1,4 @@
+
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
@@ -13,11 +14,15 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+
     url(r'^$', 'article.views.home'),
-    url(r'^test/','article.views.test'),
-    url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
-    url(r'^aboutme/', 'article.views.about_me', name = 'about_me'),
-    url(r'^tag=(?P<tag>[\w-]+)/$', 'article.views.cast_tag', name='cast_tag'),
-    url(r'^category=(?P<category>[\w-]+)/$', 'article.views.cast_category', name='cast_category'),
+    url(r'^posts', 'article.views.home'),
+    url(r'^async_posts', 'article.views.async_posts'),
+    url(r'^async_rightpage', 'article.views.async_rightpage'),
+    url(r'^post', 'article.views.detail'),
+    url(r'^aboutme', 'article.views.about_me'),
+    #url(r'^admin/', include(admin.site.urls)),
+    #url(r'^test/','article.views.test'),
+    #url(r'^tag=(?P<tag>[\w-]+)/$', 'article.views.cast_tag', name='cast_tag'),
+    #url(r'^category=(?P<category>[\w-]+)/$', 'article.views.cast_category', name='cast_category'),
 )
