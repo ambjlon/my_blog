@@ -2,15 +2,15 @@
   {% for post in post_list %}
   <section class="post">
     <header class="post-header">
-      <h2 class="post-title"><a href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
+      <h2 class="post-title"><a class="postclicks" href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
       <p class="post-meta">
         创建时间: {{ post.datetime |date:"Y年m月d日"}}
         <a class="post-category post-category-js clicks" href="/posts?cate={{ post.category }}&page=1">{{ post.category }}</a>
         {% for e in post.tag_list %}
-        <a class="post-category post-category-yui" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
+        <a class="post-category post-category-yui clicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
         {% endfor %}
       </p>
-      <a class="pure-button" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
+      <a class="pure-button postclicks" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
     </header>
     <!-- <ticket tags参考https://codepen.io/pankajparashar/pen/BKFpC.  会挤压left-page-\-> -->
   </section>

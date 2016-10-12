@@ -123,6 +123,17 @@ def detail(request):
                 raise Http404
         tag_list = post.tag.split(' ')
         return render(request, 'post.html', {'post' : post, 'tag_list' : tag_list, 'tags' : gettags()})
+
+def async_detail(request):
+        pid = request.GET.get('id');
+        try:
+                post = Article.objects.get(id=pid)
+        except Article.DoesNotExist:
+                raise Http404
+        tag_list = post.tag.split(' ')
+        html = render_to_string('async_post.html', {'post' : post, 'tag_list' : tag_list})
+        return HttpResponse(html)
+
 def about_me(request):
         return render(request, 'aboutme.html', {'tags' : gettags()})
 def test(request):
