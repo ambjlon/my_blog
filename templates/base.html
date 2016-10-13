@@ -15,11 +15,14 @@
     <!--link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'-->
     <!-- 多级菜单依赖 -->
     <link rel="stylesheet" type="text/css" href="/static/navigation.css">
+    <!--左侧sidebar隐藏 开始 -->
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/simple-sidebar.css" rel="stylesheet">
+    <!--左侧sidebar隐藏 结束 -->
     <!-- 标签云 参考:http://www.goat1000.com/tagcanvas.php
          tagcanvas example http://www.goat1000.com/tagcanvas-examples.php
          tagcanvas 响应式设计http://www.goat1000.com/tagcanvas-faq.php#faq4  找对文档了  事情很简单~_~
-         tagcanvas 设置选项 http://www.goat1000.com/tagcanvas-options.php
-      -->
+         tagcanvas 设置选项 http://www.goat1000.com/tagcanvas-options.php -->
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script><!-- 标签云 分页等共同依赖的jQuery库-->
     <script src="/static/jquery.tagcanvas.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -35,11 +38,9 @@
       },'tags')) {
       // something went wrong, hide the canvas container
       $('#myCanvasContainer').hide();
-      }
-      
+      }      
       });
-    </script>
-    
+    </script>    
     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["tsina","weixin","qzone","douban","sqq","renren","fbook","youdao","qingbiji","twi","print"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"5","bdPos":"right","bdTop":"140"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
@@ -51,26 +52,26 @@
     <!-- ajax异步请求回来的内容中不能含有js代码. http://stackoverflow.com/questions/24639335/javascript-console-log-causes-error-synchronous-xmlhttprequest-on-the-main-thr 所以把分页的js css挪到这里来了-->
     <script src="/static/ajax.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/static/ajax.css">
+    <!-- 设置左侧背景图片的样式  -->
     <style>
-      #leftpage
+      #sidebar-wrapper
       {
       border:0px solid black;
-      padding:10px;
+      //padding:10px;
       vertical-align: top;
       background-image:url('/static/bit_yinxing.jpg');
       background-repeat:no-repeat;
-      background-position:left;
+      //background-position:left;
       }
     </style>
   </head>  
 
   <body>
-    <div id="layout" class="pure-g">
-      <div class="sidebar pure-u-1 pure-u-md-1-4" id="leftpage">
-
+    <div id="wrapper">
+      <div  id="sidebar-wrapper">
         <!-- 多级菜单 参考http://www.jqueryscript.net/demo/Multi-Level-Drop-Down-Menu-with-Pure-CSS3-Minimal-Transparent-Menu/blue/-->
-        <ul class="nav">
-          <li><a href="/"><font size="2">所有文章</font></a></li>
+        <ul class="mynav"><!-- 修改navigation.css中的nav为mynav. 不然的话和侧边栏隐藏引用的bootstrap中的nav冲突, 导致鼠标悬浮的时候颜色变成白色的了. -->
+          <li ><a href="/"><font size="2">所有文章</font></a></li>
           <li class="dropdown"><a href="#"><font size="2">文章分类</font></a>
             <ul>
               <li><a href="/posts?cate=工程技术&page=1"><font size="2">工程技术</font></a></li>
@@ -92,18 +93,15 @@
         <!--   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); -->
         <!--   })(); -->
         <!-- </script> -->
-
         
-        <Div>
+        <div>
           <h1 align="center"><font size="5">Ambjlon's Blog</font></h1>
           <!-- image 响应式 参考 http://stackoverflow.com/questions/15458650/make-an-image-responsive-simplest-way-->
           <center><img src="/static/sculpture.jpeg" style='width:30%;' border="0" alt="Null" '/></center>
           <p align="center"><i class="fa fa-fw fa-user"></i><a href="/aboutme/">About Me</a>&nbsp&nbsp<i class="fa fa-fw fa-github"></i><a href="http://github.com/ambjlon" target="_blank">GitHub</a></p>
         </div>
-
         <br/>
         <br/>
-
         <div id="myCanvasContainer">
           <canvas width="500" height="500" style="width: 100%" id="myCanvas"></canvas>
         </div>
@@ -115,8 +113,8 @@
           </ul>
         </div>        
       </div>
-
-      <div class="content pure-u-1 pure-u-md-3-4" id="rightpage">
+      <a href="javascript:void(0);" id="menu-toggle"><font size="6"><i class="fa fa-fw fa-bars"></i></font></a>      
+      <div id="page-content-wrapper">
         <div>
           {% block content %}
           {% endblock %}
@@ -125,6 +123,15 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
+    <!--左侧sidebar隐藏 开始-->
+    <script src="/static/bootstrap.min.js"></script>
+    <script>
+      $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+    <!--左侧sidebar隐藏 结束-->
   </body>
 </html>

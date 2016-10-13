@@ -3,6 +3,7 @@
 输入“hg 437 djj  第三款dufwf745 、dfn^894dk大姐夫iPhone 6s&&&&74854”  
 输出：  
 hg 437 djj  
+
 dufwf745  
 894dk  
 iPhone 6s  
@@ -12,7 +13,6 @@ String s = "hg 437 djj  第三款dufwf745 、dfn^894dk大姐夫iPhone 6s&&&&7485
 String pattern = "([A-Za-z]+\\s+[0-9]+[A-Za-z0-9\\s]*|[A-Za-z]+[0-9]+[A-Za-z0-9\\s]*|[0-9]+[A-Za-z]+[A-Za-z0-9\\s]*|[0-9]+\\s+[A-Za-z]+[A-Za-z0-9\\s]*)[^a-zA-Z0-9\\s]*";
 Pattern r = Pattern.compile( pattern );
 Matcher m = r.matcher( s );
-
 ArrayList< String > p = new ArrayList<String>();
 while(m.find())
 {

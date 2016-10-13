@@ -1,6 +1,5 @@
-<div class="content pure-u-1 pure-u-md-3-4" id="rightpage">
+<div id="page-content-wrapper">
   <div>
-
     {% load custom_markdown %}
     <div class="posts" id="asyncposts">
       <section class="post">
@@ -8,9 +7,9 @@
           <h2 class="post-title">{{ post.title }}</h2>
           <p class="post-meta">
             创建时间: {{ post.date_time | date:"Y年m月d日"}}
-            <a class="post-category post-category-js clicks" href="/posts?cate={{ post.category }}&page=1" class="cdp_i">{{ post.category }}</a>
+            <a class="post-category post-category-js catetagclicks" href="/posts?cate={{ post.category }}&page=1" class="cdp_i">{{ post.category }}</a>
             {% for e in tag_list %}
-            <a class="post-category post-category-yui clicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
+            <a class="post-category post-category-yui catetagclicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
             {% endfor %}
           </p>
         </header>

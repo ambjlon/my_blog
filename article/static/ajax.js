@@ -28,9 +28,13 @@ function GetQueryString(name)
 
 $(document).ready(function() {
 
-    //chrome浏览器点击回退或者前进按钮
+    //在有新页面加载调用document.readychrome浏览器点击回退或者前进按钮
+    var alen = history.length;
+    //alert(alen);
+    //history.go(-(alen-2)); //页面不断刷新  出现了死循环.
+//    history.go(-alen+1);
+    //return;
 
-    
     //翻页相关的处理开始
     //翻页处理挪到这里. 这样可以防止初始页面还没加载完, 点击翻页出现只显示异步返回结果.
     //不使用var定义, 这是全局变量.
@@ -53,7 +57,7 @@ $(document).ready(function() {
         var actualPageNum = parseInt($('.cdp').attr('actpage'), 10);//为毛还让我再写一遍  难道在onclick等后面原来的actualPageNum失效了?
         var asyncposts = document.getElementById("asyncposts").outerHTML;
         var paging = document.getElementById("paging").outerHTML;
-        var rightpage = document.getElementById("rightpage").outerHTML;
+        var rightpage = document.getElementById("page-content-wrapper").outerHTML;
         window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, "something", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page);
     }else if(pathname == "/post"){
         pageState = 1;
@@ -92,7 +96,7 @@ $(document).ready(function() {
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             var paging = document.getElementById("paging").outerHTML;
-            var rightpage = document.getElementById("rightpage").outerHTML;
+            var rightpage = document.getElementById("page-content-wrapper").outerHTML;
             window.history.pushState({asyncposts:data, rightpage:rightpage, paging:paging, goPageNum:goPageNum, pageState:3, historyOrder:historyOrder}, "something", goHref.replace('async_posts', 'posts'));
         });
         return false;
@@ -104,24 +108,25 @@ $(document).ready(function() {
         var goHref = $(this).attr("href").replace('post', 'async_post');    
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
-            $("#rightpage").replaceWith(data);
+            $("#page-content-wrapper").replaceWith(data);
             pageState = 4;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'something', goHref.replace('async_post', 'post'));
         });
+        $.getScript("/static/duoshuo.js");
         return false;
     });
 
     //监听对类目或者标签的点击
-    $(document).on('click', ".clicks", function(event){//异步事件监听, 类似linux的io复用
+    $(document).on('click', ".catetagclicks", function(event){//异步事件监听, 类似linux的io复用
         event.preventDefault();
         var goHref = $(this).attr("href").replace('posts', 'async_rightpage');        
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             //replaceWith比html()要好. html()会在3/4中再划出3/4...
-            $("#rightpage").replaceWith(data);
+            $("#page-content-wrapper").replaceWith(data);
             pageState = 2;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
@@ -142,21 +147,21 @@ $(document).ready(function() {
             case 0://当前页面处于0状态, 然后用户点击了前进或后退按钮.
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
                 }else if(history.state.pageState == '4'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }
             break;
@@ -164,11 +169,11 @@ $(document).ready(function() {
             case 1:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
@@ -179,25 +184,25 @@ $(document).ready(function() {
             case 2:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '0'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
                 }else if(history.state.pageState == '4'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }
             break;
@@ -205,19 +210,19 @@ $(document).ready(function() {
             case 3:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);   
                 }else if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
@@ -228,21 +233,21 @@ $(document).ready(function() {
             case 4:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
-                    $("#rightpage").replaceWith(history.state.rightpage);
+                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
                 }
             }
             break;
             
             default:
-            break;
+            ;
         }
         historyOrder = parseInt(history.state.historyOrder);
         pageState = history.state.pageState;
