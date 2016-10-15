@@ -119,12 +119,17 @@ $(document).ready(function() {
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
         //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
         $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
-           setTimeout(function(){ MathJax.Hub.Config({
-                tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
-            });
-            var math = document.getElementById("page-content-wrapper");
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-	},5000);
+            //必须得等到上面的$.get执行完了即#page-content-wrapper更新完毕了才执行mathjax的渲染, 不然的话渲染找不到letax公式.
+            //实际上$.get和.getScript是同时执行的, 并不是串行. 套路真多呀~
+            //设置一个超时时间, 足够.get执行完毕, 获得#page-content-wrapper. 比如下面设置成1.5秒吧.
+            //折腾了一个小时终于发现了这个秘密. God forgive me for my sins! Bless.
+            setTimeout(function(){
+                MathJax.Hub.Config({
+                    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+                });
+                var math = document.getElementById("page-content-wrapper");
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+	        },5000);
         });
         //异步加载需要调用js渲染latex公式 结束
         return false;
@@ -265,6 +270,7 @@ $(document).ready(function() {
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
         //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
         $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
+            //这里不用设置超时了, letex公式在缓存里 很快就拿出来了.
             MathJax.Hub.Config({
                 tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
             });
