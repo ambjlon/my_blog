@@ -27,7 +27,6 @@ function GetQueryString(name)
 }
 
 $(document).ready(function() {
-
     //新页面加载的附近(调用document.ready) chrome浏览器点击回退或者前进按钮不会触发popstate, 其他浏览器大多是没问题的.
     //目前暂时把页面上的链接都换成了异步加载, 避免用户点击同步链接.
     var alen = history.length;
@@ -120,11 +119,12 @@ $(document).ready(function() {
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
         //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
         $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
-            MathJax.Hub.Config({
+           setTimeout(function(){ MathJax.Hub.Config({
                 tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
             });
             var math = document.getElementById("page-content-wrapper");
             MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+	},5000);
         });
         //异步加载需要调用js渲染latex公式 结束
         return false;
