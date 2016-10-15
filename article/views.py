@@ -9,6 +9,8 @@ from article.models import Article
 from article import util
 
 # Create your views here.
+def filter_about(posts_list):
+        return filter(lambda x:'about.md' not in x.file_name, posts_list)
 def gettags():
         post_list = Article.objects.all()
         tags = set()
@@ -24,12 +26,12 @@ def async_posts(request):
         tag = request.GET.get('tag', 'isnull');
         return_posts_list = []
         all_posts = Article.objects.all()
-
+        all_posts = filter_about(all_posts)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
                 all_posts = filter(lambda x:tag in x.tag, all_posts)
-
+        
         paginator = Paginator(all_posts, 3) #每页显示两个
         try :
                 post_list = paginator.page(page)
@@ -55,7 +57,7 @@ def async_rightpage(request):
         tag = request.GET.get('tag', 'isnull');
         return_posts_list = []
         all_posts = Article.objects.all()
-
+        all_posts = filter_about(all_posts)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
@@ -88,7 +90,7 @@ def home(request):
         
         return_post_list = []
         all_posts = Article.objects.all()
-
+        all_posts = filter_about(all_posts)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
@@ -116,26 +118,37 @@ def home(request):
         return render(request, 'home.html', {'post_list' : return_post_list, 'tags' : gettags(), 'Paginator' : post_list, 'page' : page, 'cate' : cate, 'tag' : tag})
 
 def detail(request):
-        pid = request.GET.get('id');
-        try:
-                post = Article.objects.get(id=pid)
-        except Article.DoesNotExist:
-                raise Http404
+        name = request.GET.get('name', 'isnull');
+        if( name == 'isnull'):
+                pid = request.GET.get('id');
+                try:
+                        post = Article.objects.get(id=pid)
+                except Article.DoesNotExist:
+                        raise Http404
+        else:
+                try:
+                        post = Article.objects.get(file_name=name)
+                except Article.DoesNotExist:
+                        raise Http404
         tag_list = post.tag.split(' ')
         return render(request, 'post.html', {'post' : post, 'tag_list' : tag_list, 'tags' : gettags()})
 
 def async_detail(request):
-        pid = request.GET.get('id');
-        try:
-                post = Article.objects.get(id=pid)
-        except Article.DoesNotExist:
-                raise Http404
-        tag_list = post.tag.split(' ')
+        name = request.GET.get('name', 'isnull');
+        if( name == 'isnull'):
+                pid = request.GET.get('id');
+                try:
+                        post = Article.objects.get(id=pid)
+                except Article.DoesNotExist:
+                        raise Http404
+        else:
+                try:
+                        post = Article.objects.get(file_name=name)
+                except Article.DoesNotExist:
+                        raise Http404
+        tag_list = post.tag.split(' ')        
         html = render_to_string('async_post.html', {'post' : post, 'tag_list' : tag_list})
         return HttpResponse(html)
-
-def about_me(request):
-        return render(request, 'aboutme.html', {'tags' : gettags()})
 def test(request):
         f = open("/home/jianglong.cjl/my_blog/data/macox_ssh_linux_gnuplot_conf.md","r")
         f.seek(0)

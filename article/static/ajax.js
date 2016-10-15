@@ -28,7 +28,8 @@ function GetQueryString(name)
 
 $(document).ready(function() {
 
-    //在有新页面加载调用document.readychrome浏览器点击回退或者前进按钮
+    //新页面加载的附近(调用document.ready) chrome浏览器点击回退或者前进按钮不会触发popstate, 其他浏览器大多是没问题的.
+    //目前暂时把页面上的链接都换成了异步加载, 避免用户点击同步链接.
     var alen = history.length;
     //alert(alen);
     //history.go(-(alen-2)); //页面不断刷新  出现了死循环.
@@ -115,7 +116,7 @@ $(document).ready(function() {
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'something', goHref.replace('async_post', 'post'));
         });
-        $.getScript("/static/duoshuo.js");
+        $.getScript("/static/comment.js");
         return false;
     });
 

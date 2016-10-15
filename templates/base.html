@@ -15,7 +15,7 @@
     <!--link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'-->
     <!-- 多级菜单依赖 -->
     <link rel="stylesheet" type="text/css" href="/static/navigation.css">
-    <!--左侧sidebar隐藏 开始 -->
+    <!--左侧sidebar隐藏 开始 参考https://blackrockdigital.github.io/startbootstrap-simple-sidebar/ -->
     <link href="/static/bootstrap.min.css" rel="stylesheet">
     <link href="/static/simple-sidebar.css" rel="stylesheet">
     <!--左侧sidebar隐藏 结束 -->
@@ -70,13 +70,13 @@
     <div id="wrapper">
       <div  id="sidebar-wrapper">
         <!-- 多级菜单 参考http://www.jqueryscript.net/demo/Multi-Level-Drop-Down-Menu-with-Pure-CSS3-Minimal-Transparent-Menu/blue/-->
-        <ul class="mynav"><!-- 修改navigation.css中的nav为mynav. 不然的话和侧边栏隐藏引用的bootstrap中的nav冲突, 导致鼠标悬浮的时候颜色变成白色的了. -->
-          <li ><a href="/"><font size="2">所有文章</font></a></li>
-          <li class="dropdown"><a href="#"><font size="2">文章分类</font></a>
+        <ul class="mynav"><!-- 修改navigation.css中的nav为mynav. 不然, 和侧边栏隐藏引用的bootstrap中的nav冲突, 导致鼠标悬浮的时候颜色变成白色的了. -->
+          <li ><a href="/posts?page=1" class="catetagclicks"><font size="2">所有文章</font></a></li><!-- 为了解决chrome有时候点击回退前进按钮不触发popstate事件的问题,暂时把页面上所有的链接的点击都换成了异步加载  @_@  -->
+          <li class="dropdown"><a href="javascript:void(0);"><font size="2">文章分类</font></a>
             <ul>
-              <li><a href="/posts?cate=工程技术&page=1"><font size="2">工程技术</font></a></li>
-              <li><a href="/posts?cate=算法&page=1"><font size="2">算法</font></a></li>
-              <li><a href="/posts?cate=生活&page=1"><font size="2">生活随记</font></a></li>
+              <li><a href="/posts?cate=工程技术&page=1" class="catetagclicks"><font size="2">工程技术</font></a></li>
+              <li><a href="/posts?cate=算法&page=1" class="catetagclicks"><font size="2">算法</font></a></li>
+              <li><a href="/posts?cate=生活&page=1" class="catetagclicks"><font size="2">生活随记</font></a></li>
             </ul>
           </li>
         </ul>
@@ -98,7 +98,7 @@
           <h1 align="center"><font size="5">Ambjlon's Blog</font></h1>
           <!-- image 响应式 参考 http://stackoverflow.com/questions/15458650/make-an-image-responsive-simplest-way-->
           <center><img src="/static/sculpture.jpeg" style='width:30%;' border="0" alt="Null" '/></center>
-          <p align="center"><i class="fa fa-fw fa-user"></i><a href="/aboutme/">About Me</a>&nbsp&nbsp<i class="fa fa-fw fa-github"></i><a href="http://github.com/ambjlon" target="_blank">GitHub</a></p>
+          <p align="center"><i class="fa fa-fw fa-user"></i><a class="postclicks" href="/post?id=0&name=about.md">关于本站</a>&nbsp&nbsp<i class="fa fa-fw fa-github"></i><a href="http://github.com/ambjlon" target="_blank">GitHub</a></p>
         </div>
         <br/>
         <br/>
@@ -108,7 +108,9 @@
         <div style="display:none;" id="tags"> <!-- 添加style="display:none;" 否则标签云出来之前先闪现一个常规列表  很不友好 -->
           <ul>
             {% for e in tags %}
-            <li><a href="/posts?tag={{ e }}&page=1"> {{ e }} </a></li>
+            {% if e != '' %}
+            <li><a href="/posts?tag={{ e }}&page=1" class="catetagclicks"> {{ e }} </a></li>
+            {% endif %}
             {% endfor %}
           </ul>
         </div>        
