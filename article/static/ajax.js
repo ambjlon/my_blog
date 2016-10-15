@@ -122,6 +122,7 @@ $(document).ready(function() {
             //必须得等到上面的$.get执行完了即#page-content-wrapper更新完毕了才执行mathjax的渲染, 不然的话渲染找不到letax公式.
             //实际上$.get和.getScript是同时执行的, 并不是串行. 套路真多呀~
             //设置一个超时时间, 足够.get执行完毕, 获得#page-content-wrapper. 比如下面设置成1.5秒吧.
+            //第一次点击文章 执行这段代码的时候 超时并不生效 这是为什么?
             //折腾了一个小时终于发现了这个秘密. God forgive me for my sins! Bless.
             setTimeout(function(){
                 MathJax.Hub.Config({
@@ -129,7 +130,7 @@ $(document).ready(function() {
                 });
                 var math = document.getElementById("page-content-wrapper");
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-	        },5000);
+	        },1500);
         });
         //异步加载需要调用js渲染latex公式 结束
         return false;
