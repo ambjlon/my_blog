@@ -27,6 +27,7 @@ def async_posts(request):
         return_posts_list = []
         all_posts = Article.objects.all()
         all_posts = filter_about(all_posts)
+        sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
@@ -58,6 +59,7 @@ def async_rightpage(request):
         return_posts_list = []
         all_posts = Article.objects.all()
         all_posts = filter_about(all_posts)
+        sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
@@ -91,6 +93,7 @@ def home(request):
         return_post_list = []
         all_posts = Article.objects.all()
         all_posts = filter_about(all_posts)
+        sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
                 all_posts = filter(lambda x:cate in x.category, all_posts)
         if tag != 'isnull':
@@ -149,40 +152,3 @@ def async_detail(request):
         tag_list = post.tag.split(' ')        
         html = render_to_string('async_post.html', {'post' : post, 'tag_list' : tag_list})
         return HttpResponse(html)
-def test(request):
-        f = open("/home/jianglong.cjl/my_blog/data/macox_ssh_linux_gnuplot_conf.md","r")
-        f.seek(0)
-        post = f.read()
-        f.close()
-        return render(request, 'test.html', {'post' : post, 'tags' : gettags()})
-
-def cast_tag(request, tag):
-        return_post_list = []
-        post_list = Article.objects.all()
-        for post in post_list:
-                if not tag in post.tag:
-                        continue
-                post_info = util.PostInfo()
-                post_info.id = post.id
-                post_info.title = post.title
-                post_info.category = post.category
-                post_info.tag_list = post.tag.split(' ')
-                post_info.datetime = post.date_time
-                post_info.content = post.content
-                return_post_list.append(post_info)
-        return render(request, 'tagshome.html', {'post_list' : return_post_list, 'tag':tag, 'tags' : gettags()} )
-def cast_category(request, category):
-        return_post_list = []
-        post_list = Article.objects.all()
-        for post in post_list:
-                if not category in post.category:
-                        continue
-                post_info = util.PostInfo()
-                post_info.id = post.id
-                post_info.title = post.title
-                post_info.category = post.category
-                post_info.tag_list = post.tag.split(' ')
-                post_info.datetime = post.date_time
-                post_info.content = post.content
-                return_post_list.append(post_info)
-        return render(request, 'categoryhome.html', {'post_list' : return_post_list,'category' : category, 'tags' : gettags()} )

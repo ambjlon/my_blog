@@ -33,7 +33,7 @@ $(document).ready(function() {
     var alen = history.length;
     //alert(alen);
     //history.go(-(alen-2)); //页面不断刷新  出现了死循环.
-//    history.go(-alen+1);
+    //    history.go(-alen+1);
     //return;
 
     //翻页相关的处理开始
@@ -116,7 +116,17 @@ $(document).ready(function() {
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'something', goHref.replace('async_post', 'post'));
         });
-        $.getScript("/static/comment.js");
+        //使用ajax请求到的内容可能需要动态渲染一下, 比如请求会的文章中含有latex格式的公式, 需要mathjax渲染. 
+        //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
+        //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
+        $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+            });
+            var math = document.getElementById("page-content-wrapper");
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+        });
+        //异步加载需要调用js渲染latex公式 结束
         return false;
     });
 
@@ -142,7 +152,6 @@ $(document).ready(function() {
     //window.onpopstate =
     window.addEventListener('popstate',function(event){
         //状态机
-        alert("popstate");
         switch (pageState)
         {
             case 0://当前页面处于0状态, 然后用户点击了前进或后退按钮.
@@ -252,5 +261,16 @@ $(document).ready(function() {
         }
         historyOrder = parseInt(history.state.historyOrder);
         pageState = history.state.pageState;
+        //使用ajax请求到的内容可能需要动态渲染一下, 比如请求会的文章中含有latex格式的公式, 需要mathjax渲染. 
+        //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
+        //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
+        $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+            });
+            var math = document.getElementById("page-content-wrapper");
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+        });
+        //异步加载需要调用js渲染latex公式 结束
     }, false);
 });
