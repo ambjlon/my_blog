@@ -105,6 +105,7 @@ $(document).ready(function() {
     //监听对文章的点击
     $(document).on('click', ".postclicks", function(event){
         event.preventDefault();
+        var id = $(this).attr("href").split("=")[1];
         var goHref = $(this).attr("href").replace('post', 'async_post');    
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
@@ -132,7 +133,9 @@ $(document).ready(function() {
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 	        },1500);
         });
-        
+        setTimeout(function(){
+            $("#SOHUCS").attr("sid", id);
+        }, 1000);
         //多说公共JS代码 start (一个网页只需插入一次)
         // setTimeout(function() {            
         //     var appid = 'cysE7DNJ7';
