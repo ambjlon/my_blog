@@ -1,33 +1,31 @@
-<div id="page-content-wrapper">
-  <div>
-    <div class="posts" id="asyncposts">
-      {% for post in post_list %}
-      <section class="post">
-        <header class="post-header">
-          <h2 class="post-title"><a class="postclicks" href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
-          <p class="post-meta">
-            创建时间: {{ post.datetime |date:"Y年m月d日"}}
-            {% if post.category != '' %}
-            <a class="post-category post-category-js catetagclicks" href="/posts?cate={{ post.category }}&page=1">{{ post.category }}</a>
-            {% endif %}
-            {% for e in post.tag_list %}
-            {% if e != '' %}
-            <a class="post-category post-category-yui catetagclicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
-            {% endif %}
-            {% endfor %}
-          </p>
-          <a class="pure-button postclicks" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
-        </header>
-      </section>
-      <hr />
-      {% endfor %}
-    </div>
-    <div class="content_detail__pagination cdp" actpage="{{ page }}" id="paging">
-      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:-1 }}" class="cdp_i" id="pre">前一页</a>
-      {% for page_number in Paginator.paginator.page_range  %}
-      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page_number  }}" class="cdp_i" id="num{{ page_number }}">{{ page_number  }}</a>
-      {% endfor %}
-      <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:1 }}" class="cdp_i" id="next">下一页</a>
-    </div>
+<div id="rightpage">
+  <div class="posts" id="asyncposts">
+    {% for post in post_list %}
+    <section class="post">
+      <header class="post-header">
+        <h2 class="post-title"><a class="postclicks" href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
+        <p class="post-meta">
+          创建时间: {{ post.datetime |date:"Y年m月d日"}}
+          {% if post.category != '' %}
+          <a class="post-category post-category-js catetagclicks" href="/posts?cate={{ post.category }}&page=1">{{ post.category }}</a>
+          {% endif %}
+          {% for e in post.tag_list %}
+          {% if e != '' %}
+          <a class="post-category post-category-yui catetagclicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
+          {% endif %}
+          {% endfor %}
+        </p>
+        <a class="pure-button postclicks" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
+      </header>
+    </section>
+    <hr />
+    {% endfor %}
+  </div>
+  <div class="content_detail__pagination cdp" actpage="{{ page }}" id="paging">
+    <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:-1 }}" class="cdp_i" id="pre">前一页</a>
+    {% for page_number in Paginator.paginator.page_range  %}
+    <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page_number  }}" class="cdp_i" id="num{{ page_number }}">{{ page_number  }}</a>
+    {% endfor %}
+    <a href="/posts?cate={{ cate }}&tag={{ tag }}&page={{ page|add:1 }}" class="cdp_i" id="next">下一页</a>
   </div>
 </div>

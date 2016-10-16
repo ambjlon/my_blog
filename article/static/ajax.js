@@ -57,7 +57,7 @@ $(document).ready(function() {
         var actualPageNum = parseInt($('.cdp').attr('actpage'), 10);//为毛还让我再写一遍  难道在onclick等后面原来的actualPageNum失效了?
         var asyncposts = document.getElementById("asyncposts").outerHTML;
         var paging = document.getElementById("paging").outerHTML;
-        var rightpage = document.getElementById("page-content-wrapper").outerHTML;
+        var rightpage = document.getElementById("rightpage").outerHTML;
         window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, "Ambjlon blog", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page);
     }else if(pathname == "/post"){
         pageState = 1;
@@ -96,7 +96,7 @@ $(document).ready(function() {
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             var paging = document.getElementById("paging").outerHTML;
-            var rightpage = document.getElementById("page-content-wrapper").outerHTML;
+            var rightpage = document.getElementById("rightpage").outerHTML;
             window.history.pushState({asyncposts:data, rightpage:rightpage, paging:paging, goPageNum:goPageNum, pageState:3, historyOrder:historyOrder}, "Ambjlon blog", goHref.replace('async_posts', 'posts'));
         });
         return false;
@@ -108,7 +108,7 @@ $(document).ready(function() {
         var goHref = $(this).attr("href").replace('post', 'async_post');    
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
-            $("#page-content-wrapper").replaceWith(data);
+            $("#rightpage").replaceWith(data);
             pageState = 4;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
@@ -119,16 +119,16 @@ $(document).ready(function() {
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
         //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
         $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
-            //必须得等到上面的$.get执行完了即#page-content-wrapper更新完毕了才执行mathjax的渲染, 不然的话渲染找不到letax公式.
+            //必须得等到上面的$.get执行完了即#rightpage更新完毕了才执行mathjax的渲染, 不然的话渲染找不到letax公式.
             //实际上$.get和.getScript是同时执行的, 并不是串行. 套路真多呀~
-            //设置一个超时时间, 足够.get执行完毕, 获得#page-content-wrapper. 比如下面设置成1.5秒吧.
+            //设置一个超时时间, 足够.get执行完毕, 获得#rightpage. 比如下面设置成1.5秒吧.
             //第一次点击文章 执行这段代码的时候 超时并不生效 这是为什么?
             //折腾了一个小时终于发现了这个秘密. God forgive me for my sins! Bless.
             setTimeout(function(){
                 MathJax.Hub.Config({
                     tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
                 });
-                var math = document.getElementById("page-content-wrapper");
+                var math = document.getElementById("rightpage");
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 	        },1500);
         });
@@ -154,7 +154,7 @@ $(document).ready(function() {
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             //replaceWith比html()要好. html()会在3/4中再划出3/4...
-            $("#page-content-wrapper").replaceWith(data);
+            $("#rightpage").replaceWith(data);
             pageState = 2;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
@@ -174,21 +174,21 @@ $(document).ready(function() {
             case 0://当前页面处于0状态, 然后用户点击了前进或后退按钮.
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
                 }else if(history.state.pageState == '4'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }
             break;
@@ -196,11 +196,11 @@ $(document).ready(function() {
             case 1:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
@@ -211,25 +211,25 @@ $(document).ready(function() {
             case 2:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '0'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);
                 }else if(history.state.pageState == '4'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }
             break;
@@ -237,19 +237,19 @@ $(document).ready(function() {
             case 3:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
                 }else if(history.state.pageState == '4'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $("#paging").replaceWith(history.state.paging);   
                 }else if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
                     $("#asyncposts").replaceWith(history.state.asyncposts);
                     $('.cdp').attr('actpage', history.state.goPageNum);
@@ -260,15 +260,15 @@ $(document).ready(function() {
             case 4:
             if(historyOrder < parseInt(history.state.historyOrder)){//用户点击了前进按钮
                 if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }else{//用户点击了后退按钮
                 if(history.state.pageState == '0'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '2'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }else if(history.state.pageState == '3'){
-                    $("#page-content-wrapper").replaceWith(history.state.rightpage);
+                    $("#rightpage").replaceWith(history.state.rightpage);
                 }
             }
             break;
@@ -286,7 +286,7 @@ $(document).ready(function() {
             MathJax.Hub.Config({
                 tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
             });
-            var math = document.getElementById("page-content-wrapper");
+            var math = document.getElementById("rightpage");
             MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
         });
         //异步加载需要调用js渲染latex公式 结束

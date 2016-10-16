@@ -1,28 +1,26 @@
-<div id="page-content-wrapper">
-  <div>
-    {% load custom_markdown %}
-    <div class="posts" id="asyncposts">
-      <section class="post">
-        <header class="post-header">
-          <h2 class="post-title">{{ post.title }}</h2>
-          <p class="post-meta">
-            创建时间: {{ post.date_time | date:"Y年m月d日"}}
-            {% if post.category != '' %}
-            <a class="post-category post-category-js catetagclicks" href="/posts?cate={{ post.category }}&page=1" class="cdp_i">{{ post.category }}</a>
-            {% endif %}
-            {% for e in tag_list %}
-            {% if e != '' %}
-            <a class="post-category post-category-yui catetagclicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
-            {% endif %}
-            {% endfor %}
-          </p>
-        </header>
-        <div class="post-description">
-          <p>
-            {{ post.content|custom_markdown }}
-          </p>
-        </div>
-      </section>
-    </div>
+<div id="rightpage">
+  {% load custom_markdown %}
+  <div class="posts" id="asyncposts">
+    <section class="post">
+      <header class="post-header">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-meta">
+          创建时间: {{ post.date_time | date:"Y年m月d日"}}
+          {% if post.category != '' %}
+          <a class="post-category post-category-js catetagclicks" href="/posts?cate={{ post.category }}&page=1" class="cdp_i">{{ post.category }}</a>
+          {% endif %}
+          {% for e in tag_list %}
+          {% if e != '' %}
+          <a class="post-category post-category-yui catetagclicks" href="/posts?tag={{ e }}&page=1">{{ e }}</a>
+          {% endif %}
+          {% endfor %}
+        </p>
+      </header>
+      <div class="post-description">
+        <p>
+          {{ post.content|custom_markdown }}
+        </p>
+      </div>
+    </section>
   </div>
 </div>
