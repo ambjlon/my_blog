@@ -18,9 +18,7 @@
       </p>
     </header>
     <div class="post-description">
-      <p>
-        {{ post.content|custom_markdown }}
-      </p>
+      <p>{{ post.content|custom_markdown }}</p>
       <!-- mathjax 开始http://docs.mathjax.org/  请在搜索引擎搜索mathjax和markdown 原理是markdown中含有latex公式 mathjax对这些公式进行渲染. -->
       <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script type="text/x-mathjax-config">
@@ -32,4 +30,5 @@
     </div>
   </section>
 </div><!-- /.blog-post -->
+{% include "comment.html" %}
 {% endblock %}

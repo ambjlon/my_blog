@@ -58,11 +58,11 @@ $(document).ready(function() {
         var asyncposts = document.getElementById("asyncposts").outerHTML;
         var paging = document.getElementById("paging").outerHTML;
         var rightpage = document.getElementById("page-content-wrapper").outerHTML;
-        window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, "something", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page);
+        window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, "Ambjlon blog", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page);
     }else if(pathname == "/post"){
         pageState = 1;
         var asyncposts= document.getElementById("asyncposts").outerHTML;
-        window.history.replaceState({asyncposts:asyncposts, pageState:1, historyOrder:historyOrder}, "something", href);
+        window.history.replaceState({asyncposts:asyncposts, pageState:1, historyOrder:historyOrder}, "Ambjlon blog", href);
     }
     //监听对翻页页码的点击
     $(document).on('click', ".cdp_i", function(event){//异步事件监听, 类似linux的io复用
@@ -97,7 +97,7 @@ $(document).ready(function() {
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             var paging = document.getElementById("paging").outerHTML;
             var rightpage = document.getElementById("page-content-wrapper").outerHTML;
-            window.history.pushState({asyncposts:data, rightpage:rightpage, paging:paging, goPageNum:goPageNum, pageState:3, historyOrder:historyOrder}, "something", goHref.replace('async_posts', 'posts'));
+            window.history.pushState({asyncposts:data, rightpage:rightpage, paging:paging, goPageNum:goPageNum, pageState:3, historyOrder:historyOrder}, "Ambjlon blog", goHref.replace('async_posts', 'posts'));
         });
         return false;
     });
@@ -113,7 +113,7 @@ $(document).ready(function() {
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
-            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'something', goHref.replace('async_post', 'post'));
+            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_post', 'post'));
         });
         //使用ajax请求到的内容可能需要动态渲染一下, 比如请求会的文章中含有latex格式的公式, 需要mathjax渲染. 
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
@@ -132,6 +132,18 @@ $(document).ready(function() {
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 	        },1500);
         });
+        
+        //多说公共JS代码 start (一个网页只需插入一次)
+        setTimeout(function() {
+            
+            var appid = 'cysE7DNJ7';
+            var conf = 'prod_5f40a54419bd75d503c5e7bd5916dc79';
+            var width = window.innerWidth || document.documentElement.clientWidth;
+            if (width < 960) {
+                window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id="' + appid + '&conf=' + conf + '"><\/script>"'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } ;
+        }, 5000);
+        //多说公共JS代码 end
+
         //异步加载需要调用js渲染latex公式 结束
         return false;
     });
@@ -148,7 +160,7 @@ $(document).ready(function() {
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
-            window.history.pushState({rightpage:data, pageState:2, historyOrder:historyOrder}, 'something', goHref.replace('async_rightpage', 'posts'));
+            window.history.pushState({rightpage:data, pageState:2, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_rightpage', 'posts'));
         });
         return false;
     });

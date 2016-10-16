@@ -10,7 +10,7 @@ register = template.Library()
 @register.filter(is_safe=True) 
 @stringfilter 
 def custom_markdown(value):
-   return mark_safe(markdown.markdown(value,extensions = ['markdown.extensions.fenced_code','markdown.extensions.codehilite'],extension_configs={'markdown.extensions.codehilite':{'linenums':'True'}},enable_attributes=False,safe_mode=True))
+   return mark_safe(markdown.markdown(value,extensions = ['markdown.extensions.fenced_code','markdown.extensions.codehilite'],extension_configs={'markdown.extensions.codehilite':{'linenums':'False'}},enable_attributes=False,safe_mode=True))
 
 
 
