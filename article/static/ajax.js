@@ -115,6 +115,7 @@ $(document).ready(function() {
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_post', 'post'));
             //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
+            //把多说的渲染放到这里是再合适不过了, 保证了comment-box div加载后再进行渲染. timeout可以设置成0~~
             var id = location.href.split("=")[1];
             var href = location.href;
             setTimeout(function(){
@@ -300,7 +301,7 @@ $(document).ready(function() {
                 el.setAttribute('data-url', 'http://' + location.host + href);
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
-            },10);
+            },1);
             //多说公共JS代码 end            
         }
     }, false);
