@@ -142,7 +142,7 @@ $(document).ready(function() {
                 });
                 var math = document.getElementById("rightpage");
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-	        },1100);
+	        },1500);
         });
         //异步加载需要调用js渲染latex公式 结束
         return false;
