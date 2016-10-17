@@ -109,22 +109,22 @@ $(document).ready(function() {
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             $("#rightpage").replaceWith(data);
+            pageState = 4;
+            historyOrder = maxHisrotyOrder + 1;
+            maxHisrotyOrder = maxHisrotyOrder + 1;
+            sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
+            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_post', 'post'));
             //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
-            var id = $(this).attr("href").split("=")[1];
-            var href = $(this).attr("href");
+            var id = location.href.split("=")[1];
+            var href = location.href;
             setTimeout(function(){
                 var el = document.createElement('div');
                 el.setAttribute('data-thread-key', id);
                 el.setAttribute('data-url', 'http://' + location.host + href);
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
-            },1500);
+            },1);
             //多说公共JS代码 end
-            pageState = 4;
-            historyOrder = maxHisrotyOrder + 1;
-            maxHisrotyOrder = maxHisrotyOrder + 1;
-            sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
-            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_post', 'post'));
         });
         //使用ajax请求到的内容可能需要动态渲染一下, 比如请求会的文章中含有latex格式的公式, 需要mathjax渲染. 
         //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
