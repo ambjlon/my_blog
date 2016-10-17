@@ -105,7 +105,6 @@ $(document).ready(function() {
     //监听对文章的点击
     $(document).on('click', ".postclicks", function(event){
         event.preventDefault();
-        var id = $(this).attr("href").split("=")[1];
         var goHref = $(this).attr("href").replace('post', 'async_post');    
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
@@ -133,19 +132,16 @@ $(document).ready(function() {
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 	        },1500);
         });
-        // setTimeout(function(){
-        //     $("#SOHUCS").attr("sid", id);
-        // }, 1000);
-        //多说公共JS代码 start (一个网页只需插入一次)
-        setTimeout(function() {            
-            var appid = 'cysE7DNJ7';
-            var conf = 'prod_5f40a54419bd75d503c5e7bd5916dc79';
-            var width = window.innerWidth || document.documentElement.clientWidth;
-
-            if (width < 960) {
-                alert('mobile');
-                window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id="' + appid + '&conf=' + conf + '"><\/script>"'); } else {alert('pc'); var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } ;
-        }, 2000);
+        //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
+        var id = $(this).attr("href").split("=")[1];
+        var href = $(this).attr("href");
+        setTimeout(function(){
+            var el = document.createElement('div');
+            el.setAttribute('data-thread-key', id);
+            el.setAttribute('data-url', 'http://' + location.host + href);
+            DUOSHUO.EmbedThread(el);
+            jQuery('#comment-box').append(el);
+        },200);
         //多说公共JS代码 end
 
         //异步加载需要调用js渲染latex公式 结束
@@ -284,7 +280,6 @@ $(document).ready(function() {
         historyOrder = parseInt(history.state.historyOrder);
         pageState = history.state.pageState;
         //使用ajax请求到的内容可能需要动态渲染一下, 比如请求会的文章中含有latex格式的公式, 需要mathjax渲染. 
-        //$.getScript("http://v2.uyan.cc/code/uyan.js?uid=2116479");
         //异步加载需要调用js渲染latex公式 开始. 这里为ajax请求的内容中含有动态(js代码)提供了一种解决途径.
         $.getScript("http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", function(){
             //这里不用设置超时了, letex公式在缓存里 很快就拿出来了.
@@ -293,7 +288,21 @@ $(document).ready(function() {
             });
             var math = document.getElementById("rightpage");
             MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-        });
+        });        
         //异步加载需要调用js渲染latex公式 结束
+        //异步渲染comment-box
+        if(document.getElementById("comment-box")!=undefined){
+            //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
+            var id = location.href.split("=")[1];
+            var href = location.href;
+            setTimeout(function(){
+                var el = document.createElement('div');
+                el.setAttribute('data-thread-key', id);
+                el.setAttribute('data-url', 'http://' + location.host + href);
+                DUOSHUO.EmbedThread(el);
+                jQuery('#comment-box').append(el);
+            },200);
+            //多说公共JS代码 end            
+        }
     }, false);
 });
