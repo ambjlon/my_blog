@@ -109,6 +109,17 @@ $(document).ready(function() {
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             $("#rightpage").replaceWith(data);
+            //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
+            var id = $(this).attr("href").split("=")[1];
+            var href = $(this).attr("href");
+            setTimeout(function(){
+                var el = document.createElement('div');
+                el.setAttribute('data-thread-key', id);
+                el.setAttribute('data-url', 'http://' + location.host + href);
+                DUOSHUO.EmbedThread(el);
+                jQuery('#comment-box').append(el);
+            },1500);
+            //多说公共JS代码 end
             pageState = 4;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
@@ -132,18 +143,6 @@ $(document).ready(function() {
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
 	        },1100);
         });
-        //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
-        var id = $(this).attr("href").split("=")[1];
-        var href = $(this).attr("href");
-        setTimeout(function(){
-            var el = document.createElement('div');
-            el.setAttribute('data-thread-key', id);
-            el.setAttribute('data-url', 'http://' + location.host + href);
-            DUOSHUO.EmbedThread(el);
-            jQuery('#comment-box').append(el);
-        },1500);
-        //多说公共JS代码 end
-
         //异步加载需要调用js渲染latex公式 结束
         return false;
     });
