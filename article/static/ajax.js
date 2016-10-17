@@ -130,7 +130,7 @@ $(document).ready(function() {
                 });
                 var math = document.getElementById("rightpage");
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-	        },1500);
+	        },1100);
         });
         //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
         var id = $(this).attr("href").split("=")[1];
@@ -141,7 +141,7 @@ $(document).ready(function() {
             el.setAttribute('data-url', 'http://' + location.host + href);
             DUOSHUO.EmbedThread(el);
             jQuery('#comment-box').append(el);
-        },1500);
+        },1000);
         //多说公共JS代码 end
 
         //异步加载需要调用js渲染latex公式 结束
@@ -301,7 +301,7 @@ $(document).ready(function() {
                 el.setAttribute('data-url', 'http://' + location.host + href);
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
-            },1500);
+            },10);
             //多说公共JS代码 end            
         }
     }, false);
