@@ -141,7 +141,7 @@ $(document).ready(function() {
             el.setAttribute('data-url', 'http://' + location.host + href);
             DUOSHUO.EmbedThread(el);
             jQuery('#comment-box').append(el);
-        },1000);
+        },1500);
         //多说公共JS代码 end
 
         //异步加载需要调用js渲染latex公式 结束
