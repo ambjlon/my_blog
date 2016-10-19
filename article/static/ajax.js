@@ -84,7 +84,7 @@ $(document).ready(function() {
         
         //TODO 判断是否重复点击某个页码多次, 从而对进入访问记录栈的条目进行去重
         
-        $.get(goHref, function(data,status){
+        $.get(encodeURI(goHref), function(data,status){
             //修改DOM中的文章列表
             $("#asyncposts").replaceWith(data);
             //修改分页中的actualPage以及前后页
@@ -301,7 +301,7 @@ $(document).ready(function() {
                 el.setAttribute('data-url', 'http://' + location.host + href);
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
-            },1);
+            },100);
             //多说公共JS代码 end            
         }
     }, false);
