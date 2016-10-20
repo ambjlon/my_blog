@@ -29,10 +29,10 @@ def async_posts(request):
         all_posts = filter_about(all_posts)
         sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
-                all_posts = filter(lambda x:cate in x.category, all_posts)
+                all_posts = filter(lambda x:cate==x.category, all_posts)
         if tag != 'isnull':
-                all_posts = filter(lambda x:tag in x.tag, all_posts)
-        
+                all_posts = filter(lambda x: tag in x.tag.split(' '), all_posts)
+                
         paginator = Paginator(all_posts, 12) #每页显示两个
         try :
                 post_list = paginator.page(page)
@@ -61,10 +61,10 @@ def async_rightpage(request):
         all_posts = filter_about(all_posts)
         sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
-                all_posts = filter(lambda x:cate in x.category, all_posts)
+                all_posts = filter(lambda x:cate==x.category, all_posts)
         if tag != 'isnull':
-                all_posts = filter(lambda x:tag in x.tag, all_posts)
-
+                all_posts = filter(lambda x: tag in x.tag.split(' '), all_posts)
+                
         paginator = Paginator(all_posts, 12) #每页显示两个
         try :
                 post_list = paginator.page(page)
@@ -95,9 +95,9 @@ def home(request):
         all_posts = filter_about(all_posts)
         sorted(all_posts, key=lambda x:x.date_time)
         if cate != 'isnull':
-                all_posts = filter(lambda x:cate in x.category, all_posts)
+                all_posts = filter(lambda x:cate==x.category, all_posts)
         if tag != 'isnull':
-                all_posts = filter(lambda x:tag in x.tag, all_posts)
+                all_posts = filter(lambda x: tag in x.tag.split(' '), all_posts)
                 
         paginator = Paginator(all_posts, 12) #每页显示两个
         try :
