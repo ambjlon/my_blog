@@ -33,7 +33,7 @@ def async_posts(request):
         if tag != 'isnull':
                 all_posts = filter(lambda x:tag in x.tag, all_posts)
         
-        paginator = Paginator(all_posts, 3) #每页显示两个
+        paginator = Paginator(all_posts, 12) #每页显示两个
         try :
                 post_list = paginator.page(page)
         except PageNotAnInteger :
@@ -65,7 +65,7 @@ def async_rightpage(request):
         if tag != 'isnull':
                 all_posts = filter(lambda x:tag in x.tag, all_posts)
 
-        paginator = Paginator(all_posts, 3) #每页显示两个
+        paginator = Paginator(all_posts, 12) #每页显示两个
         try :
                 post_list = paginator.page(page)
         except PageNotAnInteger :
@@ -99,7 +99,7 @@ def home(request):
         if tag != 'isnull':
                 all_posts = filter(lambda x:tag in x.tag, all_posts)
                 
-        paginator = Paginator(all_posts, 3) #每页显示两个
+        paginator = Paginator(all_posts, 12) #每页显示两个
         try :
                 post_list = paginator.page(page)
         except PageNotAnInteger :
