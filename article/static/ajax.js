@@ -58,11 +58,11 @@ $(document).ready(function() {
         var asyncposts = document.getElementById("asyncposts").outerHTML;
         var paging = document.getElementById("paging").outerHTML;
         var rightpage = document.getElementById("rightpage").outerHTML;
-        window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, "Ambjlon blog", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page);
+        window.history.replaceState({rightpage:rightpage, asyncposts:asyncposts, paging:paging, goPageNum:actualPageNum, pageState:0, historyOrder:historyOrder}, encodeURI("Ambjlon blog", "/posts?cate=" + cate + "&tag=" + tag + "&page=" + page));
     }else if(pathname == "/post"){
         pageState = 1;
         var asyncposts= document.getElementById("asyncposts").outerHTML;
-        window.history.replaceState({asyncposts:asyncposts, pageState:1, historyOrder:historyOrder}, "Ambjlon blog", href);
+        window.history.replaceState({asyncposts:asyncposts, pageState:1, historyOrder:historyOrder}, "Ambjlon blog", encodeURI(href));
     }
     //监听对翻页页码的点击
     $(document).on('click', ".cdp_i", function(event){//异步事件监听, 类似linux的io复用
@@ -83,8 +83,8 @@ $(document).ready(function() {
         }
         
         //TODO 判断是否重复点击某个页码多次, 从而对进入访问记录栈的条目进行去重
-        
-        $.get(encodeURI(goHref), function(data,status){
+        //goHref已经进行了url编码.不要再encodeURI了.
+        $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             $("#asyncposts").replaceWith(data);
             //修改分页中的actualPage以及前后页
@@ -106,14 +106,14 @@ $(document).ready(function() {
     $(document).on('click', ".postclicks", function(event){
         event.preventDefault();
         var goHref = $(this).attr("href").replace('post', 'async_post');    
-        $.get(goHref, function(data,status){
+        $.get(encodeURI(goHref), function(data,status){
             //修改DOM中的文章列表
             $("#rightpage").replaceWith(data);
             pageState = 4;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
-            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_post', 'post'));
+            window.history.pushState({rightpage:data, pageState:4, historyOrder:historyOrder}, 'Ambjlon blog', encodeURI(goHref.replace('async_post', 'post')));
             //多说公共JS代码 start  参考:http://dev.duoshuo.com/docs/50b344447f32d30066000147
             //把多说的渲染放到这里是再合适不过了, 保证了comment-box div加载后再进行渲染. timeout可以设置成0~~
             var id = location.href.split("=")[1];
@@ -121,7 +121,7 @@ $(document).ready(function() {
             setTimeout(function(){
                 var el = document.createElement('div');
                 el.setAttribute('data-thread-key', id);
-                el.setAttribute('data-url', 'http://' + location.host + href);
+                el.setAttribute('data-url', encodeURI('http://' + location.host + href));
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
             },1);
@@ -151,8 +151,8 @@ $(document).ready(function() {
     //监听对类目或者标签的点击
     $(document).on('click', ".catetagclicks", function(event){//异步事件监听, 类似linux的io复用
         event.preventDefault();
-        var goHref = $(this).attr("href").replace('posts', 'async_rightpage');        
-        $.get(goHref, function(data,status){
+        var goHref = $(this).attr("href").replace('posts', 'async_rightpage');
+        $.get(encodeURI(goHref), function(data,status){
             //修改DOM中的文章列表
             //replaceWith比html()要好. html()会在3/4中再划出3/4...
             $("#rightpage").replaceWith(data);
@@ -160,7 +160,7 @@ $(document).ready(function() {
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
-            window.history.pushState({rightpage:data, pageState:2, historyOrder:historyOrder}, 'Ambjlon blog', goHref.replace('async_rightpage', 'posts'));
+            window.history.pushState({rightpage:data, pageState:2, historyOrder:historyOrder}, 'Ambjlon blog', encodeURI(goHref.replace('async_rightpage', 'posts')));
         });
         return false;
     });
@@ -298,7 +298,7 @@ $(document).ready(function() {
             setTimeout(function(){
                 var el = document.createElement('div');
                 el.setAttribute('data-thread-key', id);
-                el.setAttribute('data-url', 'http://' + location.host + href);
+                el.setAttribute('data-url', encodeURI('http://' + location.host + href));
                 DUOSHUO.EmbedThread(el);
                 jQuery('#comment-box').append(el);
             },100);

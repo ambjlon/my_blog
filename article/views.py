@@ -21,7 +21,7 @@ def gettags():
         return tags
 
 def async_posts(request):
-        page = request.GET.get('page', 'isnull');
+        page = request.GET.get('page', 1);
         cate = request.GET.get('cate', 'isnull');
         tag = request.GET.get('tag', 'isnull');
         return_posts_list = []
@@ -53,9 +53,10 @@ def async_posts(request):
         return HttpResponse(html)
 
 def async_rightpage(request):
-        page = request.GET.get('page', 'isnull');
+        page = request.GET.get('page', 1);
         cate = request.GET.get('cate', 'isnull');
         tag = request.GET.get('tag', 'isnull');
+        
         return_posts_list = []
         all_posts = Article.objects.all()
         all_posts = filter_about(all_posts)
@@ -88,8 +89,7 @@ def async_rightpage(request):
 def home(request):
         page = request.GET.get('page', 1);
         cate = request.GET.get('cate', 'isnull');
-        tag = request.GET.get('tag', 'isnull');
-        
+        tag = request.GET.get('tag', 'isnull');        
         return_post_list = []
         all_posts = Article.objects.all()
         all_posts = filter_about(all_posts)
