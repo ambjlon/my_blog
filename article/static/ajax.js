@@ -25,19 +25,6 @@ function GetQueryString(name)
     }
     return null;
 }
-function isIE()
-{
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
-    if(isIE)
-    {
-        return "1";
-    }
-    else
-    {
-        return "-1";
-    }
-}
 $(document).ready(function() {
     //新页面加载的附近(调用document.ready) chrome浏览器点击回退或者前进按钮不会触发popstate, 其他浏览器大多是没问题的.
     //目前暂时把页面上的链接都换成了异步加载, 避免用户点击同步链接.
@@ -85,27 +72,23 @@ $(document).ready(function() {
 
         if ($(this).attr("id") === "next") {
             var goPageNum = actualPageNum + 1;
-            var goHref = next.href.replace('posts', 'async_posts');
+            var goHref = $(this).attr("href").replace('posts', 'async_posts');
         } else if ($(this).attr("id") === "pre") {
             var goPageNum = actualPageNum - 1;
-            var goHref = pre.href.replace('posts', 'async_posts');
+            var goHref = $(this).attr("href").replace('posts', 'async_posts');
         }else{
             var goPageNum = parseInt($(this).attr("href").split("page=")[1]);
             var goHref = $(this).attr("href").replace('posts', 'async_posts');
         }
         
         //TODO 判断是否重复点击某个页码多次, 从而对进入访问记录栈的条目进行去重
-        //
-        if(isIE() == "1"){
-            goHref = encodeURI(goHref);
-        }
-        $.get(goHref, function(data,status){
+        $.get(encodeURI(goHref), function(data,status){
             //修改DOM中的文章列表
             $("#asyncposts").replaceWith(data);
             //修改分页中的actualPage以及前后页
             $('.cdp').attr('actpage', goPageNum);
-            pre.href = pre.href.split("page=")[0] + "page=" + (goPageNum - 1).toString();
-            next.href = next.href.split("page=")[0] + "page=" + (goPageNum + 1).toString();
+            pre.href = decodeURI(pre.href.split("page=")[0] + "page=" + (goPageNum - 1).toString());
+            next.href = decodeURI(next.href.split("page=")[0] + "page=" + (goPageNum + 1).toString());
             pageState = 3;
             historyOrder = maxHisrotyOrder + 1;
             maxHisrotyOrder = maxHisrotyOrder + 1;
