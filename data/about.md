@@ -16,7 +16,7 @@
 如果您觉得我的文章对您有帮助, 欢迎扫码捐赠. 您的支持是我最大的动力! 捐赠完成后别忘了在下面的评论框留言~
 
 + 微信  
-  ![](/static/blog_pic/weixin_donation.jpeg)  
+  ![](/static/blog_pic/weixin_donation.jpg)  
 + 支付宝  
-  ![](/static/blog_pic/alipay_donation.png)
+  ![](/static/blog_pic/alipay_donation.jpg)
 
