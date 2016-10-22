@@ -25,7 +25,19 @@ function GetQueryString(name)
     }
     return null;
 }
-
+function isIE()
+{
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    if(isIE)
+    {
+        return "1";
+    }
+    else
+    {
+        return "-1";
+    }
+}
 $(document).ready(function() {
     //新页面加载的附近(调用document.ready) chrome浏览器点击回退或者前进按钮不会触发popstate, 其他浏览器大多是没问题的.
     //目前暂时把页面上的链接都换成了异步加载, 避免用户点击同步链接.
@@ -83,7 +95,10 @@ $(document).ready(function() {
         }
         
         //TODO 判断是否重复点击某个页码多次, 从而对进入访问记录栈的条目进行去重
-        //goHref已经进行了url编码.不要再encodeURI了.
+        //
+        if(isIE() == "1"){
+            goHref = encodeURI(goHref);
+        }
         $.get(goHref, function(data,status){
             //修改DOM中的文章列表
             $("#asyncposts").replaceWith(data);
