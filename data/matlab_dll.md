@@ -15,7 +15,7 @@
 
 输入mcc -W cpplib:yourfunLib -T link:lib yourfun.m。其中，yourfunLib是生成的DLL，Lib的前缀名字，也就是你最后可以是使用的DLL以及Lib库的名字；yourfun是你需要编译的.m函数。编译完成后得到了下图中的一些文件：  
 
-![](http://media.xtwind.com/images/2015/06/14/5832700607014ed7503bc94047626a43.jpg)  
+![](/static/blog_pic/matlab_dll.jpg)  
 
 这些文件中后缀为DLL，LIB，H的文件在VS调用的时候有用，其他文件目前没有使用。（这里我把yourfunLib指定为aetherLib了）  
 
