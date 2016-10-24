@@ -65,7 +65,7 @@ $(document).ready(function() {
     }
     //监听对翻页页码的点击
     $(document).on('click', ".cdp_i", function(event){//异步事件监听, 类似linux的io复用
-        event.preventDefault();
+        event.preventDefault();//使得原有链接对应的点击事件失效
         var actualPageNum = parseInt($('.cdp').attr('actpage'), 10);
         var pre = document.getElementById('pre');
         var next = document.getElementById('next');
@@ -97,11 +97,12 @@ $(document).ready(function() {
             var rightpage = document.getElementById("rightpage").outerHTML;
             window.history.pushState({asyncposts:data, rightpage:rightpage, paging:paging, goPageNum:goPageNum, pageState:3, historyOrder:historyOrder}, "Ambjlon blog", goHref.replace('async_posts', 'posts'));
         });
-        return false;
+        return false;//使得原有链接对应的点击事件失效
     });
 
     //监听对文章的点击
     $(document).on('click', ".postclicks", function(event){
+        //使得原有链接对应的点击事件失效
         event.preventDefault();
         var goHref = $(this).attr("href").replace('post', 'async_post');    
         $.get(encodeURI(goHref), function(data,status){
@@ -143,12 +144,12 @@ $(document).ready(function() {
 	        },1500);
         });
         //异步加载需要调用js渲染latex公式 结束
-        return false;
+        return false;//使得原有链接对应的点击事件失效
     });
 
     //监听对类目或者标签的点击
     $(document).on('click', ".catetagclicks", function(event){//异步事件监听, 类似linux的io复用
-        event.preventDefault();
+        event.preventDefault();//使得原有链接对应的点击事件失效
         var goHref = $(this).attr("href").replace('posts', 'async_rightpage');
         $.get(encodeURI(goHref), function(data,status){
             //修改DOM中的文章列表
@@ -160,7 +161,7 @@ $(document).ready(function() {
             sessionStorage.setItem("maxHisrotyOrder", maxHisrotyOrder.toString());
             window.history.pushState({rightpage:data, pageState:2, historyOrder:historyOrder}, 'Ambjlon blog', encodeURI(goHref.replace('async_rightpage', 'posts')));
         });
-        return false;
+        return false;//使得原有链接对应的点击事件失效
     });
 
 
