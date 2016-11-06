@@ -47,4 +47,5 @@
 # python insert_txtblog_2_mysql.py 'linux网络抓包'  '奇技淫巧' 'linux tshark' linux_zhuabao.md  '2015-10-03 01:09:24'
 # python insert_txtblog_2_mysql.py 'ping命令 icmp协议 ip层协议 traceroute命令'  '奇技淫巧' 'linux ping' ping_icmp_traceroute.md  '2016-08-20 15:18:44'
 # python insert_txtblog_2_mysql.py 'sudo emacs commond not found'  '奇技淫巧' 'linux shell' shell_sudo_command.md  '2016-02-27 18:29:21'
-python insert_txtblog_2_mysql.py 'mac管理员用户和root用户' '奇技淫巧' 'mac' mac_admin_root.md '2016-03-03 11:18:54'
+# python insert_txtblog_2_mysql.py 'mac管理员用户和root用户' '奇技淫巧' 'mac' mac_admin_root.md '2016-03-03 11:18:54'
+python insert_txtblog_2_mysql.py '螺旋矩阵中的序号和坐标对应关系' '阳春白雪' '面试题' xuanzhuan_matrix.md '2016-11-06 14:40:21'
