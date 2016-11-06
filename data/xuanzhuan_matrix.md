@@ -1,5 +1,5 @@
 ### 问题
-![](/static/blog_pic/xuanzhuan_matrix.png)  
+![](/static/blog_pic/xuanzhuan_matrix.jpg)  
 标记坐标(0,0)的位置的序号为1, 然后从坐标为(0,0)的位置开始沿着红线所示的路径顺时针旋转, 每经过一个位置序号加1, 这样每个位置都对分配到一个正整数的序号.  
 
 + 给出一个序号, 求这个序号对应的坐标.
