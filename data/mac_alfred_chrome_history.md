@@ -11,12 +11,12 @@
 1. Syncing是什么?  
 syncing就是把alfred的偏好设置保存到一个自定义目录下, 然后这个目录下的相关文件可以拷贝到其他机器的syncing自定义目录下, 这样可以实现不同机器之间alfred偏好设置的同步.
 2. 如何可以对中文字符进行匹配搜索?  
-不能对中文字符进行搜索的原因是因为chrome.py文件中对输入的query采用的编码方式不对. 对输入query进行unicode编码:
+    不能对中文字符进行搜索的原因是因为chrome.py文件中对输入的query采用的编码方式不对. 对输入query进行unicode编码:  
+    
+        :::python
+        query = unicode(arguments.get('QUERY'), 'utf-8')
+    相关修改已经保存到fork出来的代码git@github.com:ambjlon/alfred-chrome-history.git的master分支.  
 
-```
-query = unicode(arguments.get('QUERY'), 'utf-8')
-```
-相关修改已经保存到fork出来的代码git@github.com:ambjlon/alfred-chrome-history.git的master分支.  
 3. 设置更多的结果展示.  
 alfred.xml函数的第二个参数可以指定产出多少个结果, 默认的是9个, 这在[alfred-python](https://github.com/nikipore/alfred-python)的alfred.py文件的\_MAX\_RESULTS\_DEFAULT变量进行了定义. 将第二个参数设置成一个适度大的值即可, 比如100.  
 另外history\_results函数使用了yield返回结果, 表明这个函数返回一个迭代对象. 对此函数调用时, 迭代n次,  history\_results就返回n个结果, 即便还可以有更过的结果进行返回. 这就是yield的效果.
