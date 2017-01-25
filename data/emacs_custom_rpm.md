@@ -11,10 +11,10 @@
 6. 编写emacs.spec文件(附录)放到SPECS目录下.
 7. 执行rpmbuild -ba  SPECS/emacs.spec, 成功执行完成以后在RPMS目录下会有rpm生成.
 ### 安装rpm
-1. 执行 rpm -ivh  --nodeps --dbpath ~/.rpm/   emacs-24.5-1.el6.x86_64.rpm
+1. 执行 rpm -ivh  --nodeps --dbpath ~/.rpm/   emacs-24.5-1.el6.x86_64.rpm  
    参数说明:
-   + --dbpath指定使用的rpm数据库, 若所指路径不存在则创建.
-   + --nodeps不依赖系统的软件. dbpath使用的是本用户的rpm数据库, 所以会找不到系统的依赖.
+       + --dbpath指定使用的rpm数据库, 若所指路径不存在则创建.
+       + --nodeps不依赖系统的软件. dbpath使用的是本用户的rpm数据库, 所以会找不到系统的依赖.
 2. 修改.bash_profile使得emacs指向/tmp/emacs/bin/emacs
    
 ## 要点
