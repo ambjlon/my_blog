@@ -50,4 +50,5 @@
 # python insert_txtblog_2_mysql.py 'mac管理员用户和root用户' '奇技淫巧' 'mac' mac_admin_root.md '2016-03-03 11:18:54'
 # python insert_txtblog_2_mysql.py '螺旋矩阵中的序号和坐标对应关系' '阳春白雪' '面试题' xuanzhuan_matrix.md '2016-11-06 14:40:21'
 # python insert_txtblog_2_mysql.py 'alfred chrome历史记录搜索' '奇技淫巧' 'alfred mac python' mac_alfred_chrome_history.md '2016-11-24 11:30:46'
-python insert_txtblog_2_mysql.py '制作non-sudo权限安装的emacs rpm' '奇技淫巧' 'rpm emacs' emacs_custom_rpm.md '2017-01-25 14:51:30'
+#python insert_txtblog_2_mysql.py '制作non-sudo权限安装的emacs rpm' '奇技淫巧' 'rpm emacs' emacs_custom_rpm.md '2017-01-25 14:51:30'
+python insert_txtblog_2_mysql.py 'shell通过有名管道控制并发进程数' '奇技淫巧' 'shell' shell_use_pipeline_run_mass_tasks.md '2017-01-26 15:13:10'
