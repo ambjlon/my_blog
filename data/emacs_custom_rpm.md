@@ -5,7 +5,7 @@
 1. 找一台有sudo权限的机器并通过yum安装rpmdevtools rpmlint等rpm制作工具.
 2. 创建一个新的用户rpmmaker, 然后切换到这个用户.
 3. 执行rpmdev-setuptree初始化rpm打包环境并创建目录.
-   ![](/static/blog_pic/emacs_custom_rpm.png)  
+   ![](/static/blog_pic/emacs_custom_rpm.png)
 4. 安装gcc make等编译工具.
 5. 下载emacs的安装源码(emacs-24.5.tar.gz)放到SOURCES目录下.
 6. 编写emacs.spec文件(附录)放到SPECS目录下.
