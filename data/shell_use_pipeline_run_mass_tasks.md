@@ -12,31 +12,31 @@
 ## 使用管道控制进程并发
 假设我们允许最多有40个进程同时运行. 首先建立一个管道, 向这个管道写入40行内容进行初始化(&后台运行40次). 然后每次要启动新进程之前都要去这个管道read, 能娶到一行那就启动一个新进程, 不能读取就阻塞在那里不启动新进程. 每个进程运行结束的时候, 通过echo向管道写入一行内容, 给接下来启动新进程创建机会~~  
 
-        :::shell
-        ##masterpro.sh
-        temp_fifo_file=$$.info        #以当前进程号为临时管道取名
-        mkfifo $temp_fifo_file        #创建临时管道
-        exec 1988<>$temp_fifo_file    #把文件描述符1988绑定到管道，后续可以通过1988这个文件描述符对管道进行读写
-        rm $temp_fifo_file            #清空管道内容    
-        temp_thread=40                #同时并发的最大进程数
-        for ((i=0;i<temp_thread;i++)) 
-        do
-            echo "a"                  #每行一个"a".
-        done >&1988                   #将占位信息写入文件描述符为1988的管道.
-        sh subprocess.sh              #fork子进程. 子进程会继承主进程的文件描述符资源.
-        exec 1988>&-                  #关闭主进程的文件描述, 不影响子进程读写管道内容. 文件描述符是每个进程专有的.
-        
-        ##subpro.sh
-        for((i=1;i<=10;i++))
-        do
-            read
-            {
-                [do something]       #此处不要后台运行!!
-                echo "a" > &1988
-            }&                       #后台执行
-        done < &1988
-        wait                         #等待前面启动的所有后台进程执行完. wait只等待本进程中直接fork的后台子进程, 不会等待子进程中再继续fork的子进程! 
-        exec  1988>&-
+    :::shell
+    ##masterpro.sh
+    temp_fifo_file=$$.info        #以当前进程号为临时管道取名
+    mkfifo $temp_fifo_file        #创建临时管道
+    exec 1988<>$temp_fifo_file    #把文件描述符1988绑定到管道，后续可以通过1988这个文件描述符对管道进行读写
+    rm $temp_fifo_file            #清空管道内容    
+    temp_thread=40                #同时并发的最大进程数
+    for ((i=0;i<temp_thread;i++)) 
+    do
+        echo "a"                  #每行一个"a".
+    done >&1988                   #将占位信息写入文件描述符为1988的管道.
+    sh subprocess.sh              #fork子进程. 子进程会继承主进程的文件描述符资源.
+    exec 1988>&-                  #关闭主进程的文件描述, 不影响子进程读写管道内容. 文件描述符是每个进程专有的.
+    
+    ##subpro.sh
+    for((i=1;i<=10;i++))
+    do
+        read
+        {
+            [do something]       #此处不要后台运行!!
+            echo "a" > &1988
+        }&                       #后台执行
+    done < &1988
+    wait                         #等待前面启动的所有后台进程执行完. wait只等待本进程中直接fork的后台子进程, 不会等待子进程中再继续fork的子进程! 
+    exec  1988>&-
         
 read命令默认是以换行为分隔符的. echo -e "Happy new year\c" > tmp, 这样故意去掉末尾的换行符会导致读取不到任何内容.
 
