@@ -12,5 +12,9 @@ $$L(\Theta)=\Pi_{i=1}^{i=m}P(y_i|X_i;\Theta)=\Pi_{i=1}^{i=m}h_\Theta(X_i)^{y_i}(
 $$l(\Theta)=logL(\Theta)=\sum_{i=1}^{i=m}(y_{i}logh_\Theta(X_{i})+(1-y_{i})log(1-h_\Theta(X_{i})))\tag{6}$$
 
 最大似然估计就是在给定的样本数据下, 求解使得似然函数取得最大值的$\Theta$. 使用梯度上升求解使得对数似然函数取得最大值的$\Theta$, 先求$l(\Theta)$对$\theta_{k}$的偏导数:  
-$$\frac{\delta}{\delta\theta_{i}}l(\Theta)=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})+(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}(1-h_{\Theta}(X_{i})))
-=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i}))$$
+$$
+\begin{split}
+\frac{\delta}{\delta\theta_{i}}l(\Theta)=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})+(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}(1-h_{\Theta}(X_{i})))\\
+&=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i}))
+\end{split}\tag{7}
+$$
