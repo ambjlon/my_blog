@@ -35,7 +35,7 @@ $$
 &=\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
 &=\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
 &=\frac{1}{1+e^{\Theta^{T}X_{i}}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}
-\end{spilt}\tag{8}
+\end{split}\tag{8}
 $$
 所以, $\theta_{k}$的迭代过程为:
 $$\theta_{k}:=\theta_{k}+\alpha\sum_{i=1}^{i=m}(y_{i}-h_{\Theta}(X_{i}))X_{i}^{k}$$
