@@ -16,6 +16,8 @@ $$
 \begin{split}
 \frac{\delta}{\delta\theta_{i}}l(\Theta)&=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})+(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}(1-h_{\Theta}(X_{i}))) (复合对数求导)\\\\
 &=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})}\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i}))(1的导数是0)\\\\
-&=\sum_{i=1}^{i=m}(y_{i}\frac{1}(h_{\Theta}(X_{i}))-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})})\frac{\delta}{\delta\theta_{k}}h_{\Theta}{X_{i}}(提起公因子)
+&=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})})\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})(提取公因子)\\\\
+&=\sum_{i=1}^{i=m}(y_{i}\frac{1}{g(\Theta^{T}X_{i})}-(1-y_{i})\frac{1}{1-g(\Theta^{T}X_{i})})g(\Theta^{T}X_{i})(1-g(\Theta^{T}X_{i}))\frac{\delta}{\delta\theta_{k}}\Theta^{T}X_{i}(\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})的求导参看$(8)$的推导过程)
+
 \end{split}\tag{7}
 $$
