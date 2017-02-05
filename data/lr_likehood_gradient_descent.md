@@ -28,10 +28,10 @@ $$
 其中$\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})$的求导过程如下:
 $$
 \begin{split}
-\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})=\frac{\delta}{\delta\theta_{k}}g(\Theta^{T}X_{i})\\\\
+\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})&=\frac{\delta}{\delta\theta_{k}}g(\Theta^{T}X_{i})\\\\
 &=\frac{\delta}{\delta\theta_{k}}\frac{1}{1+e^{-\Theta^{T}X_{i}}}\\\\
 &=\frac{\delta}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\\\\
-&=\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}(e^{\Theta^{T}X_{i}}+1)-\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}(除法求导公式)\\\\
+&=\frac{\delta e^{\Theta^{T}X_{i}}}{\delta\theta_{k}}(e^{\Theta^{T}X_{i}}+1)-\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}(除法求导公式)\\\\
 &=\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
 &=\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
 &=\frac{1}{1+e^{\Theta^{T}X_{i}}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}
