@@ -34,7 +34,8 @@ $$
 &=\frac{\delta e^{\Theta^{T}X_{i}}}{\delta\theta_{k}}(e^{\Theta^{T}X_{i}}+1)-\frac{\delta e^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}(除法求导公式)\\\\
 &=\frac{\delta e^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
 &=\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
-&=\frac{1}{1+e^{\Theta^{T}X_{i}}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}
+&=\frac{1}{1+e^{\Theta^{T}X_{i}}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}\\\\
+&=g(\Theta^{T}X_{i})(1-g(\Theta^{T}X_{i}))\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}
 \end{split}\tag{8}
 $$
 所以, $\theta_{k}$的迭代过程为:
