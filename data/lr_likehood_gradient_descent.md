@@ -19,6 +19,23 @@ $$
 &=\sum_{i=1}^{i=m}(y_{i}\frac{1}{h_{\Theta}(X_{i})}-(1-y_{i})\frac{1}{1-h_{\Theta}(X_{i})})\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})(提取公因子)\\\\
 &=\sum_{i=1}^{i=m}(y_{i}\frac{1}{g(\Theta^{T}X_{i})}-(1-y_{i})\frac{1}{1-g(\Theta^{T}X_{i})})g(\Theta^{T}X_{i})(1-g(\Theta^{T}X_{i}))\frac{\delta}{\delta\theta_{k}}\Theta^{T}X_{i}   (注:\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})的求导参看(8)的推导过程)\\\\
 &=\sum_{i=1}^{i=m}(y_{i}(1-g(\Theta^{T}X_{i}))-(1-y_{i})(1-g(\Theta^{T}X_{i})))\frac{\delta}{\delta\theta_{k}}\Theta^{T}X_{i}\\\\
-&=\sum_{i=1}^{i=m}(y_{i}(1-g(\Theta^{T}X_{i}))-(1-y_{i})(1-g(\Theta^{T}X_{i})))X_{i}^{k}
+&=\sum_{i=1}^{i=m}(y_{i}(1-g(\Theta^{T}X_{i}))-(1-y_{i})g(\Theta^{T}X_{i}))X_{i}^{k}\\\\
+&=\sum_{i=1}^{i=m}(y_{i}-y_{i}g(\Theta^{T}X_{i})-g(\Theta^{T}X_{i})+y_{i}g(\Theta^{T}X_{i}))X_{i}^{k}\\\\
+&=\sum_{i=1}^{i=m}(y_{i}-g(\Theta^{T}X_{i}))X_{i}^{k}\\\\
+&=\sum_{i=1}^{i=m}(y_{i}-h_{\Theta}(X_{i}))X_{i}^{k}
 \end{split}\tag{7}
 $$
+其中$\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})$的求导过程如下:
+$$
+\begin{split}
+\frac{\delta}{\delta\theta_{k}}h_{\Theta}(X_{i})=\frac{\delta}{\delta\theta_{k}}g(\Theta^{T}X_{i})\\\\
+&=\frac{\delta}{\delta\theta_{k}}\frac{1}{1+e^{-\Theta^{T}X_{i}}}\\\\
+&=\frac{\delta}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\\\\
+&=\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}(e^{\Theta^{T}X_{i}}+1)-\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}(除法求导公式)\\\\
+&=\frac{\deltae^{\Theta^{T}X_{i}}}{\delta\theta_{k}}\frac{1}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
+&=\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}\frac{e^{\Theta^{T}X_{i}}}{(e^{\Theta^{T}X_{i}}+1)^{2}}\\\\
+&=\frac{1}{1+e^{\Theta^{T}X_{i}}}\frac{e^{\Theta^{T}X_{i}}}{1+e^{\Theta^{T}X_{i}}}\frac{\delta\Theta^{T}X_{i}}{\delta\theta_{k}}
+\end{spilt}\tag{8}
+$$
+所以, $\theta_{k}$的迭代过程为:
+$$\theta_{k}:=\theta_{k}+\alpha\sum_{i=1}^{i=m}(y_{i}-h_{\Theta}(X_{i}))X_{i}^{k}$$
