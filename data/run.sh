@@ -52,4 +52,4 @@
 # python insert_txtblog_2_mysql.py 'alfred chrome历史记录搜索' '奇技淫巧' 'alfred mac python' mac_alfred_chrome_history.md '2016-11-24 11:30:46' '168'
 # python insert_txtblog_2_mysql.py '制作non-sudo权限安装的emacs rpm' '奇技淫巧' 'rpm emacs' emacs_custom_rpm.md '2017-01-25 14:51:30' '169'
 # python insert_txtblog_2_mysql.py 'shell通过有名管道控制并发进程数' '奇技淫巧' 'shell' shell_use_pipeline_run_mass_tasks.md '2017-01-26 15:13:10' '170'
-# python insert_txtblog_2_mysql.py '梯度下降求解逻辑回归(LR)模型最大似然估计的推导过程' '阳春白雪' 'LR' lr_likehood_gradient_descent.md '2017-02-04 22:44:11' '172'
+# python insert_txtblog_2_mysql.py '梯度上升法求解逻辑回归(LR)模型的最大似然估计' '阳春白雪' 'LR' lr_likehood_gradient_descent.md '2017-02-04 22:44:11' '172'
