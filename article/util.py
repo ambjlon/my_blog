@@ -9,3 +9,4 @@ class PostInfo():
         self.tag_list = []
         self.datetime = datetime.today()
         self.content = ''
+        self.fixed_id = ''

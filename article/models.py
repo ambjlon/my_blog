@@ -9,6 +9,7 @@ class Article(models.Model) :
     date_time = models.DateTimeField(auto_now_add = False)
     content = models.TextField(blank = True, null = True)
     file_name = models.CharField(max_length = 100)
+    fixed_id = models.CharField(max_length = 32)
 
     def get_absolute_url(self):
         path = reverse('detail', kwargs={'id':self.id})

@@ -3,7 +3,7 @@
     {% for post in post_list %}
     <section class="post">
       <header class="post-header">
-        <h2 class="post-title"><a class="postclicks" href="/post?id={{post.id}}"><font size="4">{{ post.title }}</font></a></h2>
+        <h2 class="post-title"><a class="postclicks" href="/post?id={{post.fixed_id}}"><font size="4">{{ post.title }}</font></a></h2>
         <p class="post-meta">
           创建时间: {{ post.datetime |date:"Y年m月d日"}}
           {% if post.category != '' %}
@@ -15,7 +15,7 @@
           {% endif %}
           {% endfor %}
         </p>
-        <a class="pure-button postclicks" href="/post?id={{ post.id }}"><font size="2">Read More...</font></a>
+        <a class="pure-button postclicks" href="/post?id={{ post.fixed_id }}"><font size="2">Read More...</font></a>
       </header>
     </section>
     <hr />

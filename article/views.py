@@ -48,6 +48,7 @@ def async_posts(request):
                 post_info.tag_list = post.tag.split(' ')
                 post_info.datetime = post.date_time
                 post_info.content = post.content
+                post_info.fixed_id = post.fixed_id
                 return_posts_list.append(post_info)
         html = render_to_string('async_posts.html', {'post_list' : return_posts_list})
         return HttpResponse(html)
@@ -81,6 +82,7 @@ def async_rightpage(request):
                 post_info.tag_list = post.tag.split(' ')
                 post_info.datetime = post.date_time
                 post_info.content = post.content
+                post_info.fixed_id = post.fixed_id
                 return_posts_list.append(post_info)
         html = render_to_string('async_rightpage.html', {'post_list' : return_posts_list, 'Paginator' : post_list, 'page' : page, 'cate' : cate, 'tag' : tag})
         return HttpResponse(html)
@@ -116,6 +118,7 @@ def home(request):
                 post_info.tag_list = post.tag.split(' ')
                 post_info.datetime = post.date_time
                 post_info.content = post.content
+                post_info.fixed_id = post.fixed_id
                 return_post_list.append(post_info)
         #Paginator在模板中只是分页使用, 并不适用其中包含的文章内容.
         return render(request, 'home.html', {'post_list' : return_post_list, 'tags' : gettags(), 'Paginator' : post_list, 'page' : page, 'cate' : cate, 'tag' : tag})
