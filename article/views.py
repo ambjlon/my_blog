@@ -128,7 +128,7 @@ def detail(request):
         if( name == 'isnull'):
                 pid = request.GET.get('id');
                 try:
-                        post = Article.objects.get(id=pid)
+                        post = Article.objects.get(fixed_id=pid)
                 except Article.DoesNotExist:
                         raise Http404
         else:
@@ -144,7 +144,7 @@ def async_detail(request):
         if( name == 'isnull'):
                 pid = request.GET.get('id');
                 try:
-                        post = Article.objects.get(id=pid)
+                        post = Article.objects.get(fixed_id=pid)
                 except Article.DoesNotExist:
                         raise Http404
         else:
